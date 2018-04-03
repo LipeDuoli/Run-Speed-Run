@@ -1,7 +1,7 @@
 package br.com.duoli.sr4j;
 
 import br.com.duoli.sr4j.fluent.game.GameSearch;
-import br.com.duoli.sr4j.games.GameService;
+import br.com.duoli.sr4j.services.GameService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

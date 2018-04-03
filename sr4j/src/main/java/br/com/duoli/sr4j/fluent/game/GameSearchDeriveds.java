@@ -2,9 +2,9 @@ package br.com.duoli.sr4j.fluent.game;
 
 import java.io.IOException;
 
-import br.com.duoli.sr4j.common.PageableList;
-import br.com.duoli.sr4j.games.Game;
-import br.com.duoli.sr4j.games.GameService;
+import br.com.duoli.sr4j.models.common.PageableList;
+import br.com.duoli.sr4j.models.games.Game;
+import br.com.duoli.sr4j.services.GameService;
 
 class GameSearchDeriveds implements IDerivedGames {
 

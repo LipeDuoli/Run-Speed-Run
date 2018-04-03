@@ -3,8 +3,8 @@ package br.com.duoli.sr4j.fluent.game;
 import java.io.IOException;
 import java.util.List;
 
-import br.com.duoli.sr4j.games.GameService;
-import br.com.duoli.sr4j.variables.Variable;
+import br.com.duoli.sr4j.models.variables.Variable;
+import br.com.duoli.sr4j.services.GameService;
 
 class GameSearchVariables implements IGameVariables {
 

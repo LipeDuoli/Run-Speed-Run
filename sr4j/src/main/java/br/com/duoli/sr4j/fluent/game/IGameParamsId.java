@@ -1,6 +1,6 @@
 package br.com.duoli.sr4j.fluent.game;
 
-import br.com.duoli.sr4j.games.Game;
+import br.com.duoli.sr4j.models.games.Game;
 
 public interface IGameParamsId {
 
