@@ -5,12 +5,14 @@ import org.junit.Test;
 import java.util.List;
 
 import br.com.duoli.sr4j.SpeedRun4jClient;
+import br.com.duoli.sr4j.fluent.common.Embed;
 import br.com.duoli.sr4j.models.categories.Category;
 import br.com.duoli.sr4j.models.common.PageableList;
 import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
 import br.com.duoli.sr4j.models.levels.Level;
 import br.com.duoli.sr4j.models.variables.Variable;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class GameServiceTest {
@@ -29,6 +31,7 @@ public class GameServiceTest {
         Game game = SpeedRun4jClient.getGame().withId(gameId).fetch();
 
         assertNotNull(game);
+        assertEquals(gameId, game.getId());
     }
 
     @Test
@@ -74,8 +77,15 @@ public class GameServiceTest {
     }
 
     @Test
+    public void testDescerializeGame_embedCategory(){
+        Game game = SpeedRun4jClient.getGame().withId(gameId).embedResource(Embed.Games.CATEGORIES).fetch();
+
+        assertNotNull(game.getCategories());
+    }
+
+    @Test
     public void random() {
-        List<Game> games = SpeedRun4jClient.getGame().withName("Super Mario Bros").fetch().getData();
+        List<Game> games = SpeedRun4jClient.getGame().withName("Super Mario Bros").embedResource(Embed.Games.CATEGORIES).fetch().getData();
 
         System.out.println("Results for Super Mario Bros search: " + games.size());
         for (Game game : games) {
@@ -90,7 +100,7 @@ public class GameServiceTest {
         System.out.println("Game Release Date: " + game.getReleaseDate().toString());
         System.out.println("Game Cover: " + game.getAssets().getCoverLarge().getUri());
 
-        List<Category> categories = SpeedRun4jClient.getGame().withId(game.getId()).getCategories().fetch();
+        List<Category> categories = game.getCategories();
         System.out.println("Game has " + categories.size() + " categories");
         for (Category category : categories) {
             System.out.print(category.getName() + " | ");
@@ -102,8 +112,6 @@ public class GameServiceTest {
         System.out.println("Category id: " + category.getId());
         System.out.println("Category Name: " + category.getName());
 
-        List<Leaderboard> leaderboards = SpeedRun4jClient.getGame().withId(game.getId()).getGameRecords().fetch().getData();
-        System.out.println(leaderboards.size());
     }
 
 }

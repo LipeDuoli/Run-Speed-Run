@@ -1,7 +1,10 @@
 package br.com.duoli.sr4j.fluent.game;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import br.com.duoli.sr4j.fluent.common.Embed;
 import br.com.duoli.sr4j.models.games.Game;
 import br.com.duoli.sr4j.services.GameService;
 
@@ -9,20 +12,34 @@ public class GameSearchId implements IGameParamsId {
 
     private GameService gameService;
     private String gameId;
+    private Map<String, String> queryParams;
 
     public GameSearchId(GameService gameService, String gameId) {
         this.gameService = gameService;
         this.gameId = gameId;
+        this.queryParams = new HashMap<>();
     }
 
     @Override
     public Game fetch() {
         try {
-            return gameService.withId(gameId).execute().body();
+            return gameService.withId(gameId, queryParams).execute().body().getData();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public IGameParamsId embedResource(Embed.Games... resources) {
+        if (resources != null) {
+            StringBuilder builder = new StringBuilder();
+            for (Embed.Games r : resources) {
+                builder.append(r.toString()).append(",");
+            }
+            queryParams.put("embed", builder.toString());
+        }
+        return this;
     }
 
     @Override

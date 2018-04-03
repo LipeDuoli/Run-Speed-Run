@@ -6,7 +6,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import br.com.duoli.sr4j.models.categories.Category;
+import br.com.duoli.sr4j.models.common.EnvelopeList;
 import br.com.duoli.sr4j.models.common.Link;
+import br.com.duoli.sr4j.models.levels.Level;
 
 public class Game {
 
@@ -28,6 +31,8 @@ public class Game {
     private Date created;
     private GameAssets assets;
     private List<Link> links;
+    private EnvelopeList<Level> levels;
+    private EnvelopeList<Category> categories;
 
     public String getId() {
         return id;
@@ -95,5 +100,19 @@ public class Game {
 
     public List<Link> getLinks() {
         return links;
+    }
+
+    /**
+     * @return a list of levels only if you embed this resource on query
+     */
+    public List<Level> getLevels() {
+        return levels.getData();
+    }
+
+    /**
+     * @return a list of categories only if you embed this resource on query
+     */
+    public List<Category> getCategories() {
+        return categories.getData();
     }
 }

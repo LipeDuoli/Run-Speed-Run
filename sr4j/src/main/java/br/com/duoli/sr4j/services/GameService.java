@@ -3,6 +3,7 @@ package br.com.duoli.sr4j.services;
 import java.util.Map;
 
 import br.com.duoli.sr4j.models.categories.Category;
+import br.com.duoli.sr4j.models.common.Envelope;
 import br.com.duoli.sr4j.models.common.EnvelopeList;
 import br.com.duoli.sr4j.models.common.PageableList;
 import br.com.duoli.sr4j.models.games.Game;
@@ -23,7 +24,7 @@ public interface GameService {
     Call<PageableList<Game>> getAll(@QueryMap Map<String, String> queryParams);
 
     @GET(GAME_WITH_ID_PATH)
-    Call<Game> withId(@Path("id") String gameId);
+    Call<Envelope<Game>> withId(@Path("id") String gameId, @QueryMap Map<String, String> queryParams);
 
     @GET(GAME_WITH_ID_PATH + "/categories")
     Call<EnvelopeList<Category>> categoriesForId(@Path("id") String gameId);

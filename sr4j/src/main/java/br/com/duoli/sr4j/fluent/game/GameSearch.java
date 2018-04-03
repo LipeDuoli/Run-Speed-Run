@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.duoli.sr4j.fluent.common.Embed;
 import br.com.duoli.sr4j.models.common.PageableList;
 import br.com.duoli.sr4j.models.games.Game;
 import br.com.duoli.sr4j.services.GameService;
@@ -92,6 +93,16 @@ public class GameSearch implements IGameParams {
     @Override
     public IGameParams bulk() {
         queryParams.put("_bulk", "true");
+        return this;
+    }
+
+    @Override
+    public IGameParams embedResource(Embed.Games... resources) {
+        StringBuilder builder = new StringBuilder();
+        for (Embed.Games r: resources) {
+            builder.append(r.toString()).append(",");
+        }
+        queryParams.put("embed", builder.toString());
         return this;
     }
 
