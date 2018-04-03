@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import br.com.duoli.sr4j.categories.Category;
-import br.com.duoli.sr4j.common.EnvelopeList;
 import br.com.duoli.sr4j.games.GameService;
 
 class GameSearchCategory implements IGameCategories {
@@ -18,9 +17,9 @@ class GameSearchCategory implements IGameCategories {
     }
 
     @Override
-    public EnvelopeList<Category> fetch() {
+    public List<Category> fetch() {
         try {
-            return gameService.categoriesForId(gameId).execute().body();
+            return gameService.categoriesForId(gameId).execute().body().getData();
         } catch (IOException e) {
             e.printStackTrace();
             return null;

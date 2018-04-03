@@ -19,73 +19,73 @@ public class GameSearch implements IGameParams {
     }
 
     @Override
-    public IGameParams name(String name) {
+    public IGameParams withName(String name) {
         queryParams.put("name", name);
         return this;
     }
 
     @Override
-    public IGameParamsId id(String id) {
+    public IGameParamsId withId(String id) {
         return new GameSearchId(gameService, id);
     }
 
     @Override
-    public IGameParams abreviation(String abreviation) {
+    public IGameParams withAbreviation(String abreviation) {
         queryParams.put("abbreviation", abreviation);
         return this;
     }
 
     @Override
-    public IGameParams released(int year) {
+    public IGameParams releasedIn(int year) {
         queryParams.put("released", String.valueOf(year));
         return this;
     }
 
     @Override
-    public IGameParams gameType(String gameTypeId) {
+    public IGameParams toGameType(String gameTypeId) {
         queryParams.put("gametype", gameTypeId);
         return this;
     }
 
     @Override
-    public IGameParams plataform(String plataformId) {
+    public IGameParams toPlataform(String plataformId) {
         queryParams.put("platform", plataformId);
         return this;
     }
 
     @Override
-    public IGameParams region(String regionId) {
-        queryParams.put("region", regionId);
+    public IGameParams toRegion(String regionId) {
+        queryParams.put("toRegion", regionId);
         return this;
     }
 
     @Override
-    public IGameParams genre(String genreId) {
-        queryParams.put("genre", genreId);
+    public IGameParams withGenre(String genreId) {
+        queryParams.put("withGenre", genreId);
         return this;
     }
 
     @Override
-    public IGameParams engine(String engineId) {
-        queryParams.put("engine", engineId);
+    public IGameParams withEngine(String engineId) {
+        queryParams.put("withEngine", engineId);
         return this;
     }
 
     @Override
-    public IGameParams developer(String developerId) {
-        queryParams.put("developer", developerId);
+    public IGameParams fromDeveloper(String developerId) {
+        queryParams.put("fromDeveloper", developerId);
         return this;
     }
 
     @Override
-    public IGameParams publisher(String publisherId) {
-        queryParams.put("publisher", publisherId);
+    public IGameParams fromPublisher(String publisherId) {
+        queryParams.put("fromPublisher", publisherId);
         return this;
     }
 
     @Override
-    public IGameParams moderator(String moderatorId) {
-        queryParams.put("moderator", moderatorId);
+    public IGameParams fromModerator(String moderatorId) {
+        queryParams.put("fromModerator", moderatorId);
         return this;
     }
 

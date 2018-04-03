@@ -5,29 +5,29 @@ import br.com.duoli.sr4j.games.Game;
 
 public interface IGameParams {
 
-    IGameParams name(String name);
+    IGameParams withName(String name);
 
-    IGameParamsId id(String id);
+    IGameParamsId withId(String id);
 
-    IGameParams abreviation(String abreviation);
+    IGameParams withAbreviation(String abreviation);
 
-    IGameParams released(int year);
+    IGameParams releasedIn(int year);
 
-    IGameParams gameType(String gameTypeId);
+    IGameParams toGameType(String gameTypeId);
 
-    IGameParams plataform(String plataformId);
+    IGameParams toPlataform(String plataformId);
 
-    IGameParams region(String regionId);
+    IGameParams toRegion(String regionId);
 
-    IGameParams genre(String genreId);
+    IGameParams withGenre(String genreId);
 
-    IGameParams engine(String engineId);
+    IGameParams withEngine(String engineId);
 
-    IGameParams developer(String developerId);
+    IGameParams fromDeveloper(String developerId);
 
-    IGameParams publisher(String publisherId);
+    IGameParams fromPublisher(String publisherId);
 
-    IGameParams moderator(String moderatorId);
+    IGameParams fromModerator(String moderatorId);
 
     IGameParams bulk();
 

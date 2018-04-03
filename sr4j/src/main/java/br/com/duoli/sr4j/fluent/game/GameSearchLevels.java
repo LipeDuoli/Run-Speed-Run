@@ -3,7 +3,6 @@ package br.com.duoli.sr4j.fluent.game;
 import java.io.IOException;
 import java.util.List;
 
-import br.com.duoli.sr4j.common.EnvelopeList;
 import br.com.duoli.sr4j.games.GameService;
 import br.com.duoli.sr4j.levels.Level;
 
@@ -18,9 +17,9 @@ class GameSearchLevels implements IGameLevels {
     }
 
     @Override
-    public EnvelopeList<Level> fetch() {
+    public List<Level> fetch() {
         try {
-            return gameService.levelsForId(gameId).execute().body();
+            return gameService.levelsForId(gameId).execute().body().getData();
         } catch (IOException e) {
             e.printStackTrace();
             return null;

@@ -3,7 +3,6 @@ package br.com.duoli.sr4j.fluent.game;
 import java.io.IOException;
 import java.util.List;
 
-import br.com.duoli.sr4j.common.EnvelopeList;
 import br.com.duoli.sr4j.games.GameService;
 import br.com.duoli.sr4j.variables.Variable;
 
@@ -18,9 +17,9 @@ class GameSearchVariables implements IGameVariables {
     }
 
     @Override
-    public EnvelopeList<Variable> fetch() {
+    public List<Variable> fetch() {
         try {
-            return gameService.variablesForId(gameId).execute().body();
+            return gameService.variablesForId(gameId).execute().body().getData();
         } catch (IOException e) {
             e.printStackTrace();
             return null;

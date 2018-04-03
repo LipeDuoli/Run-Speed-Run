@@ -6,6 +6,7 @@ import java.util.List;
 
 import br.com.duoli.sr4j.SpeedRun4jClient;
 import br.com.duoli.sr4j.categories.Category;
+import br.com.duoli.sr4j.common.PageableList;
 import br.com.duoli.sr4j.leaderboards.Leaderboard;
 import br.com.duoli.sr4j.levels.Level;
 import br.com.duoli.sr4j.variables.Variable;
@@ -25,49 +26,56 @@ public class GameServiceTest {
 
     @Test
     public void testDescerializeGameWithID_noParameters() {
-        Game game = SpeedRun4jClient.getGame().id(gameId).fetch();
+        Game game = SpeedRun4jClient.getGame().withId(gameId).fetch();
 
         assertNotNull(game);
     }
 
     @Test
     public void testDescerializeGameCategoriesForId_noParameters() {
-        List<Category> categories = SpeedRun4jClient.getGame().id(gameId).getCategories().fetch().getData();
+        List<Category> categories = SpeedRun4jClient.getGame().withId(gameId).getCategories().fetch();
 
         assertNotNull(categories);
     }
 
     @Test
     public void testDescerializeGameLevelsForId_noParameters() {
-        List<Level> levels = SpeedRun4jClient.getGame().id(gameId).getLevels().fetch().getData();
+        List<Level> levels = SpeedRun4jClient.getGame().withId(gameId).getLevels().fetch();
 
         assertNotNull(levels);
     }
 
     @Test
     public void testDescerializeGameVariablesForId_noParameters() {
-        List<Variable> variables = SpeedRun4jClient.getGame().id("kyd4pxde").getVariables().fetch().getData();
+        List<Variable> variables = SpeedRun4jClient.getGame().withId("kyd4pxde").getVariables().fetch();
 
         assertNotNull(variables);
     }
 
     @Test
     public void testDescerializeDerivedGamesForId_noParameters() {
-        List<Game> games = SpeedRun4jClient.getGame().id(gameId).getDerivedGames().fetch().getData();
+        List<Game> games = SpeedRun4jClient.getGame().withId(gameId).getDerivedGames().fetch().getData();
 
         assertNotNull(games);
     }
 
     @Test
     public void testDescerializeGameRecordsforId_noParameters() {
-        List<Leaderboard> leaderboards = SpeedRun4jClient.getGame().id(gameId).getGameRecords().fetch().getData();
+        List<Leaderboard> leaderboards = SpeedRun4jClient.getGame().withId(gameId).getGameRecords().fetch().getData();
 
         assertNotNull(leaderboards);
     }
 
     @Test
+    public void testDescerializeGamesList_bulkSearch(){
+        PageableList<Game> games = SpeedRun4jClient.getGame().bulk().fetch();
+
+        assertNotNull(games.getData());
+    }
+
+    @Test
     public void random() {
-        List<Game> games = SpeedRun4jClient.getGame().name("Super Mario Bros").fetch().getData();
+        List<Game> games = SpeedRun4jClient.getGame().withName("Super Mario Bros").fetch().getData();
 
         System.out.println("Results for Super Mario Bros search: " + games.size());
         for (Game game : games) {
@@ -82,7 +90,7 @@ public class GameServiceTest {
         System.out.println("Game Release Date: " + game.getReleaseDate().toString());
         System.out.println("Game Cover: " + game.getAssets().getCoverLarge().getUri());
 
-        List<Category> categories = SpeedRun4jClient.getGame().id(game.getId()).getCategories().fetch().getData();
+        List<Category> categories = SpeedRun4jClient.getGame().withId(game.getId()).getCategories().fetch();
         System.out.println("Game has " + categories.size() + " categories");
         for (Category category : categories) {
             System.out.print(category.getName() + " | ");
@@ -94,7 +102,7 @@ public class GameServiceTest {
         System.out.println("Category id: " + category.getId());
         System.out.println("Category Name: " + category.getName());
 
-        List<Leaderboard> leaderboards = SpeedRun4jClient.getGame().id(game.getId()).getGameRecords().fetch().getData();
+        List<Leaderboard> leaderboards = SpeedRun4jClient.getGame().withId(game.getId()).getGameRecords().fetch().getData();
         System.out.println(leaderboards.size());
     }
 

@@ -1,9 +1,10 @@
 package br.com.duoli.sr4j.fluent.game;
 
+import java.util.List;
+
 import br.com.duoli.sr4j.categories.Category;
-import br.com.duoli.sr4j.common.EnvelopeList;
 
 public interface IGameCategories {
 
-    EnvelopeList<Category> fetch();
+    List<Category> fetch();
 }
