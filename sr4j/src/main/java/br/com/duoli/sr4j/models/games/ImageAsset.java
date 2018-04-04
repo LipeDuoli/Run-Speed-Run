@@ -1,6 +1,6 @@
 package br.com.duoli.sr4j.models.games;
 
-class ImageAsset {
+public class ImageAsset {
 
     private String uri;
     private int width;

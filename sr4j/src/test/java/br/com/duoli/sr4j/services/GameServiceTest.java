@@ -1,4 +1,4 @@
-package br.com.duoli.sr4j.models.games;
+package br.com.duoli.sr4j.services;
 
 import org.junit.Test;
 
@@ -8,6 +8,7 @@ import br.com.duoli.sr4j.SpeedRun4jClient;
 import br.com.duoli.sr4j.fluent.common.Embed;
 import br.com.duoli.sr4j.models.categories.Category;
 import br.com.duoli.sr4j.models.common.PageableList;
+import br.com.duoli.sr4j.models.games.Game;
 import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
 import br.com.duoli.sr4j.models.levels.Level;
 import br.com.duoli.sr4j.models.variables.Variable;

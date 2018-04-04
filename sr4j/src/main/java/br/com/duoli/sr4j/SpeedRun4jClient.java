@@ -1,7 +1,9 @@
 package br.com.duoli.sr4j;
 
 import br.com.duoli.sr4j.fluent.game.GameSearch;
+import br.com.duoli.sr4j.fluent.leaderboards.LeaderBoardsSearch;
 import br.com.duoli.sr4j.services.GameService;
+import br.com.duoli.sr4j.services.LeaderboardsService;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -19,5 +21,9 @@ public class SpeedRun4jClient {
 
     public static GameSearch getGame() {
         return new GameSearch(createService(GameService.class));
+    }
+
+    public static LeaderBoardsSearch getLeaderbard(){
+        return new LeaderBoardsSearch(createService(LeaderboardsService.class));
     }
 }
