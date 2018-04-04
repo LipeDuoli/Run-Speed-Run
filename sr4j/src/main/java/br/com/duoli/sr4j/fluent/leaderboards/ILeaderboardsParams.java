@@ -1,5 +1,6 @@
 package br.com.duoli.sr4j.fluent.leaderboards;
 
+import br.com.duoli.sr4j.models.common.TimeType;
 import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
 
 public interface ILeaderboardsParams {
@@ -8,4 +9,14 @@ public interface ILeaderboardsParams {
     ILeaderboardsParams toCategory(String categoryId);
     ILeaderboardsParams toLevel(String levelId);
     Leaderboard fetch();
+    ILeaderboardsParams top(int topN);
+    ILeaderboardsParams fromPlataform(String plataformId);
+    ILeaderboardsParams fromRegion(String regionId);
+    ILeaderboardsParams onlyEmulator();
+    ILeaderboardsParams onlyRealDevice();
+    ILeaderboardsParams onlyWithVideos();
+    ILeaderboardsParams timing(TimeType time);
+    ILeaderboardsParams beforeDate(int year, int month, int day);
+    ILeaderboardsParams withVariable(String baseVariable, String equalVariable);
+
 }
