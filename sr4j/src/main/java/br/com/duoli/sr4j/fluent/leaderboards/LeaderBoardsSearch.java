@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.duoli.sr4j.exceptions.SearchException;
+import br.com.duoli.sr4j.models.common.Envelope;
 import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
 import br.com.duoli.sr4j.services.LeaderboardsService;
+import br.com.duoli.sr4j.util.ErrorUtil;
+import retrofit2.Response;
 
 public class LeaderBoardsSearch implements ILeaderboardsParams {
 
@@ -41,23 +45,27 @@ public class LeaderBoardsSearch implements ILeaderboardsParams {
 
     @Override
     public Leaderboard fetch() {
-        Leaderboard leaderboard;
+        if (gameId == null || categoryId == null) {
+            throw new SearchException("Inform at least a Game AND Category");
+        }
+        Leaderboard leaderboard = null;
+        Response<Envelope<Leaderboard>> response;
         try {
             if (levelId == null) {
-                leaderboard = leaderboardsService.getLeaderBoards(gameId, categoryId, queryParams)
-                        .execute()
-                        .body()
-                        .getData();
+                response = leaderboardsService
+                        .getLeaderBoards(gameId, categoryId, queryParams)
+                        .execute();
             } else {
-                leaderboard = leaderboardsService
+                response = leaderboardsService
                         .getLevelLeaderBoards(gameId, categoryId, levelId, queryParams)
-                        .execute()
-                        .body()
-                        .getData();
+                        .execute();
             }
+            if (!response.isSuccessful()) {
+                throw new SearchException(ErrorUtil.parseError(response).getMessage());
+            }
+            leaderboard = response.body().getData();
         } catch (IOException e) {
             e.printStackTrace();
-            leaderboard = null;
         }
         return leaderboard;
     }

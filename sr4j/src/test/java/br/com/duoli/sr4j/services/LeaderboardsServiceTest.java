@@ -3,6 +3,7 @@ package br.com.duoli.sr4j.services;
 import org.junit.Test;
 
 import br.com.duoli.sr4j.SpeedRun4jClient;
+import br.com.duoli.sr4j.exceptions.SearchException;
 import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
 
 import static org.junit.Assert.assertEquals;
@@ -39,4 +40,10 @@ public class LeaderboardsServiceTest {
         assertEquals(categoryLevelId, leaderboard.getCategory());
         assertEquals(levelId, leaderboard.getLevel());
     }
+
+    @Test(expected = SearchException.class)
+    public void testLeaderbordsSearch_noCategory_throwException() {
+        Leaderboard leaderboard = SpeedRun4jClient.getLeaderbard().toGame(gameId).fetch();
+    }
+
 }

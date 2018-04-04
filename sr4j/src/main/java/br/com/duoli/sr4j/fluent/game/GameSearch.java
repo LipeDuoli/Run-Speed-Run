@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.duoli.sr4j.exceptions.SearchException;
 import br.com.duoli.sr4j.fluent.common.Embed;
 import br.com.duoli.sr4j.models.common.PageableList;
 import br.com.duoli.sr4j.models.games.Game;
 import br.com.duoli.sr4j.services.GameService;
+import br.com.duoli.sr4j.util.ErrorUtil;
+import retrofit2.Response;
 
 public class GameSearch implements IGameParams {
 
@@ -109,7 +112,11 @@ public class GameSearch implements IGameParams {
     @Override
     public PageableList<Game> fetch() {
         try {
-            return gameService.getAll(queryParams).execute().body();
+            Response<PageableList<Game>> response = gameService.getAll(queryParams).execute();
+            if (!response.isSuccessful()){
+                throw new SearchException(ErrorUtil.parseError(response).getMessage());
+            }
+            return response.body();
         } catch (IOException e) {
             e.printStackTrace();
             return null;

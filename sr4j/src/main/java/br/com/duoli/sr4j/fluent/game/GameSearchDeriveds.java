@@ -2,9 +2,12 @@ package br.com.duoli.sr4j.fluent.game;
 
 import java.io.IOException;
 
+import br.com.duoli.sr4j.exceptions.SearchException;
 import br.com.duoli.sr4j.models.common.PageableList;
 import br.com.duoli.sr4j.models.games.Game;
 import br.com.duoli.sr4j.services.GameService;
+import br.com.duoli.sr4j.util.ErrorUtil;
+import retrofit2.Response;
 
 class GameSearchDeriveds implements IDerivedGames {
 
@@ -19,7 +22,11 @@ class GameSearchDeriveds implements IDerivedGames {
     @Override
     public PageableList<Game> fetch() {
         try {
-            return gameService.derivedGamesForId(gameId).execute().body();
+            Response<PageableList<Game>> response = gameService.derivedGamesForId(gameId).execute();
+            if (!response.isSuccessful()){
+                throw new SearchException(ErrorUtil.parseError(response).getMessage());
+            }
+            return response.body();
         } catch (IOException e) {
             e.printStackTrace();
             return null;

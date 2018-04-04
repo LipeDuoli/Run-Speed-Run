@@ -4,9 +4,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import br.com.duoli.sr4j.exceptions.SearchException;
 import br.com.duoli.sr4j.fluent.common.Embed;
+import br.com.duoli.sr4j.models.common.Envelope;
 import br.com.duoli.sr4j.models.games.Game;
 import br.com.duoli.sr4j.services.GameService;
+import br.com.duoli.sr4j.util.ErrorUtil;
+import retrofit2.Response;
 
 public class GameSearchId implements IGameParamsId {
 
@@ -23,7 +27,11 @@ public class GameSearchId implements IGameParamsId {
     @Override
     public Game fetch() {
         try {
-            return gameService.withId(gameId, queryParams).execute().body().getData();
+            Response<Envelope<Game>> response = gameService.withId(gameId, queryParams).execute();
+            if (!response.isSuccessful()){
+                throw new SearchException(ErrorUtil.parseError(response).getMessage());
+            }
+            return response.body().getData();
         } catch (IOException e) {
             e.printStackTrace();
             return null;
