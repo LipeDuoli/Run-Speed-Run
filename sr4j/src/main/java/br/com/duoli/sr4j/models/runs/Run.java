@@ -1,10 +1,15 @@
 package br.com.duoli.sr4j.models.runs;
 
+import com.google.gson.annotations.JsonAdapter;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import br.com.duoli.sr4j.models.common.JsonEmbedDataAdapter;
 import br.com.duoli.sr4j.models.common.Link;
+import br.com.duoli.sr4j.models.platforms.Platform;
+import br.com.duoli.sr4j.models.regions.Region;
 
 public class Run {
 
@@ -24,6 +29,10 @@ public class Run {
     private Link splits;
     private Map<String, String> values;
     private List<Link> links;
+    @JsonAdapter(JsonEmbedDataAdapter.class)
+    private Platform platform;
+    @JsonAdapter(JsonEmbedDataAdapter.class)
+    private Region region;
 
     public String getId() {
         return id;
@@ -87,5 +96,19 @@ public class Run {
 
     public List<Link> getLinks() {
         return links;
+    }
+
+    /**
+     * @return an plataform only if you embed this resource on query
+     */
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    /**
+     * @return an region only if you embed this resource on query
+     */
+    public Region getRegion() {
+        return region;
     }
 }

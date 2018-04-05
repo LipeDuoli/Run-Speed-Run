@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.com.duoli.sr4j.models.categories.Category;
-import br.com.duoli.sr4j.models.common.JsonEmbedDataAdapter;
+import br.com.duoli.sr4j.models.common.JsonEmbedDataListAdapter;
 import br.com.duoli.sr4j.models.common.Link;
 import br.com.duoli.sr4j.models.levels.Level;
 
@@ -32,9 +32,9 @@ public class Game {
     private Date created;
     private GameAssets assets;
     private List<Link> links;
-    @JsonAdapter(JsonEmbedDataAdapter.class)
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
     private List<Level> levels;
-    @JsonAdapter(JsonEmbedDataAdapter.class)
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
     private List<Category> categories;
 
     public String getId() {

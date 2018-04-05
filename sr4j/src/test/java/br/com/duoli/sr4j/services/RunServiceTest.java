@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.List;
 
 import br.com.duoli.sr4j.SpeedRun4jClient;
+import br.com.duoli.sr4j.fluent.common.Embed;
 import br.com.duoli.sr4j.models.runs.Run;
 
 import static org.junit.Assert.assertEquals;
@@ -27,6 +28,13 @@ public class RunServiceTest {
 
         assertNotNull(run);
         assertEquals(runId, run.getId());
+    }
+
+    @Test
+    public void testDescerializeSimgleRun_embedPlataform() {
+        Run run = SpeedRun4jClient.getRun().withId(runId).embedResource(Embed.Runs.PLATAFORM).fetch();
+
+        assertNotNull(run.getPlatform());
     }
 
 }

@@ -48,4 +48,19 @@ public class Embed {
             }
         }
     }
+
+    public enum Runs {
+        REGION {
+            @Override
+            public String toString() {
+                return "region";
+            }
+        },
+        PLATAFORM {
+            @Override
+            public String toString() {
+                return "platform";
+            }
+        }
+    }
 }

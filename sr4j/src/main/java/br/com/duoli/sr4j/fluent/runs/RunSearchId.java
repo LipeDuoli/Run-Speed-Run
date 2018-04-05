@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.duoli.sr4j.exceptions.SearchException;
+import br.com.duoli.sr4j.fluent.common.Embed;
 import br.com.duoli.sr4j.models.common.Envelope;
 import br.com.duoli.sr4j.models.runs.Run;
 import br.com.duoli.sr4j.services.RunService;
@@ -36,5 +37,17 @@ public class RunSearchId implements IRunParamsId {
 
         }
         return null;
+    }
+
+    @Override
+    public IRunParamsId embedResource(Embed.Runs... resources) {
+        if (resources.length > 0) {
+            StringBuilder builder = new StringBuilder();
+            for (Embed.Runs r : resources) {
+                builder.append(r.toString()).append(",");
+            }
+            queryParams.put("embed", builder.toString());
+        }
+        return this;
     }
 }

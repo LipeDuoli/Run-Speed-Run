@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Map;
 
-import br.com.duoli.sr4j.models.common.JsonEmbedDataAdapter;
+import br.com.duoli.sr4j.models.common.JsonEmbedDataListAdapter;
 import br.com.duoli.sr4j.models.common.Link;
 import br.com.duoli.sr4j.models.common.TimeType;
 import br.com.duoli.sr4j.models.platforms.Platform;
@@ -29,13 +29,13 @@ public class Leaderboard {
     private Map<String, String> values;
     private List<LeaderboardPlace> runs;
     private List<Link> links;
-    @JsonAdapter(JsonEmbedDataAdapter.class)
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
     private List<User> players;
-    @JsonAdapter(JsonEmbedDataAdapter.class)
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
     private List<Region> regions;
-    @JsonAdapter(JsonEmbedDataAdapter.class)
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
     private List<Platform> platforms;
-    @JsonAdapter(JsonEmbedDataAdapter.class)
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
     private List<Variable> variables;
 
     public String getGame() {
