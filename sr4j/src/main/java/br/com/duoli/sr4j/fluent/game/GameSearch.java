@@ -28,7 +28,6 @@ public class GameSearch implements IGameParams {
         return this;
     }
 
-    @Override
     public IGameParamsId withId(String id) {
         return new GameSearchId(gameService, id);
     }

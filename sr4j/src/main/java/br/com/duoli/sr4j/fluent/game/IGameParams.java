@@ -8,8 +8,6 @@ public interface IGameParams {
 
     IGameParams withName(String name);
 
-    IGameParamsId withId(String id);
-
     IGameParams withAbreviation(String abreviation);
 
     IGameParams releasedIn(int year);

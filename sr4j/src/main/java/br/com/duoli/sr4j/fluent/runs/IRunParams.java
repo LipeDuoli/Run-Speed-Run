@@ -9,8 +9,6 @@ public interface IRunParams {
 
     PageableList<Run> fetch();
 
-    IRunParamsId withId(String runId);
-
     IRunParams fromUser(String userId);
 
     IRunParams fromGuest(String guestId);
