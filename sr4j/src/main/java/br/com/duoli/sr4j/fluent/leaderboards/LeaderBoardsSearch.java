@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.com.duoli.sr4j.exceptions.SearchException;
+import br.com.duoli.sr4j.fluent.common.Embed;
 import br.com.duoli.sr4j.models.common.Envelope;
 import br.com.duoli.sr4j.models.common.TimeType;
 import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
@@ -127,5 +128,17 @@ public class LeaderBoardsSearch implements ILeaderboardsParams {
     public ILeaderboardsParams withVariable(String baseVariable, String equalVariable) {
         queryParams.put("var-" + baseVariable, equalVariable);
         return null;
+    }
+
+    @Override
+    public ILeaderboardsParams embedResource(Embed.LeaderBoards... resources) {
+        if (resources.length > 0){
+            StringBuilder builder = new StringBuilder();
+            for (Embed.LeaderBoards r: resources) {
+                builder.append(r.toString()).append(",");
+            }
+            queryParams.put("embed", builder.toString());
+        }
+        return this;
     }
 }
