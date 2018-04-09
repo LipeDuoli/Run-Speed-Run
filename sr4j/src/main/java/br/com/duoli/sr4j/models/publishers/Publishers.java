@@ -1,21 +1,14 @@
-package br.com.duoli.sr4j.models.regions;
+package br.com.duoli.sr4j.models.publishers;
 
 import java.util.List;
 
 import br.com.duoli.sr4j.models.common.Link;
 
-public class Region {
+public class Publishers {
 
     private String id;
     private String name;
     private List<Link> links;
-
-    public Region() {
-    }
-
-    public Region(String id) {
-        this.id = id;
-    }
 
     public String getId() {
         return id;

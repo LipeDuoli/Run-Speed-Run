@@ -6,8 +6,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import br.com.duoli.sr4j.models.categories.Category;
 import br.com.duoli.sr4j.models.common.JsonEmbedDataAdapter;
 import br.com.duoli.sr4j.models.common.Link;
+import br.com.duoli.sr4j.models.games.Game;
+import br.com.duoli.sr4j.models.levels.Level;
 import br.com.duoli.sr4j.models.platforms.Platform;
 import br.com.duoli.sr4j.models.regions.Region;
 
@@ -15,9 +18,12 @@ public class Run {
 
     private String id;
     private String weblink;
-    private String game;
-    private String level;
-    private String category;
+    @JsonAdapter(JsonEmbedDataAdapter.class)
+    private Game game;
+    @JsonAdapter(JsonEmbedDataAdapter.class)
+    private Level level;
+    @JsonAdapter(JsonEmbedDataAdapter.class)
+    private Category category;
     private RunVideo video;
     private String comment;
     private RunStatus status;
@@ -42,15 +48,15 @@ public class Run {
         return weblink;
     }
 
-    public String getGame() {
+    public Game getGame() {
         return game;
     }
 
-    public String getLevel() {
+    public Level getLevel() {
         return level;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 

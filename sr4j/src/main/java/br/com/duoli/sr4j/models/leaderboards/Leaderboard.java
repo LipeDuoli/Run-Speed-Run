@@ -6,9 +6,13 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Map;
 
+import br.com.duoli.sr4j.models.categories.Category;
+import br.com.duoli.sr4j.models.common.JsonEmbedDataAdapter;
 import br.com.duoli.sr4j.models.common.JsonEmbedDataListAdapter;
 import br.com.duoli.sr4j.models.common.Link;
 import br.com.duoli.sr4j.models.common.TimeType;
+import br.com.duoli.sr4j.models.games.Game;
+import br.com.duoli.sr4j.models.levels.Level;
 import br.com.duoli.sr4j.models.platforms.Platform;
 import br.com.duoli.sr4j.models.regions.Region;
 import br.com.duoli.sr4j.models.users.User;
@@ -16,10 +20,13 @@ import br.com.duoli.sr4j.models.variables.Variable;
 
 public class Leaderboard {
 
-    private String game;
+    @JsonAdapter(JsonEmbedDataAdapter.class)
+    private Game game;
     private String weblink;
-    private String category;
-    private String level;
+    @JsonAdapter(JsonEmbedDataAdapter.class)
+    private Category category;
+    @JsonAdapter(JsonEmbedDataAdapter.class)
+    private Level level;
     private String platform;
     private String region;
     private String emulators;
@@ -38,7 +45,7 @@ public class Leaderboard {
     @JsonAdapter(JsonEmbedDataListAdapter.class)
     private List<Variable> variables;
 
-    public String getGame() {
+    public Game getGame() {
         return game;
     }
 
@@ -46,11 +53,11 @@ public class Leaderboard {
         return weblink;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public String getLevel() {
+    public Level getLevel() {
         return level;
     }
 

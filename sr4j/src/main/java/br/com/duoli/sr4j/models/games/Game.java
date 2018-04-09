@@ -10,7 +10,13 @@ import java.util.Map;
 import br.com.duoli.sr4j.models.categories.Category;
 import br.com.duoli.sr4j.models.common.JsonEmbedDataListAdapter;
 import br.com.duoli.sr4j.models.common.Link;
+import br.com.duoli.sr4j.models.developers.Developers;
+import br.com.duoli.sr4j.models.genres.Genre;
 import br.com.duoli.sr4j.models.levels.Level;
+import br.com.duoli.sr4j.models.platforms.Platform;
+import br.com.duoli.sr4j.models.publishers.Publishers;
+import br.com.duoli.sr4j.models.regions.Region;
+import br.com.duoli.sr4j.models.variables.Variable;
 
 public class Game {
 
@@ -22,12 +28,17 @@ public class Game {
     private Date releaseDate;
     private GameRuleSet ruleSet;
     private List<String> gametypes;
-    private List<String> platforms;
-    private List<String> regions;
-    private List<String> genres;
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
+    private List<Platform> platforms;
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
+    private List<Region> regions;
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
+    private List<Genre> genres;
     private List<String> engines;
-    private List<String> developers;
-    private List<String> publishers;
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
+    private List<Developers> developers;
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
+    private List<Publishers> publishers;
     private Map<String, String> moderators;
     private Date created;
     private GameAssets assets;
@@ -36,6 +47,8 @@ public class Game {
     private List<Level> levels;
     @JsonAdapter(JsonEmbedDataListAdapter.class)
     private List<Category> categories;
+    @JsonAdapter(JsonEmbedDataListAdapter.class)
+    private List<Variable> variables;
 
     public String getId() {
         return id;
@@ -65,15 +78,15 @@ public class Game {
         return gametypes;
     }
 
-    public List<String> getPlatforms() {
+    public List<Platform> getPlatforms() {
         return platforms;
     }
 
-    public List<String> getRegions() {
+    public List<Region> getRegions() {
         return regions;
     }
 
-    public List<String> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
@@ -81,11 +94,11 @@ public class Game {
         return engines;
     }
 
-    public List<String> getDevelopers() {
+    public List<Developers> getDevelopers() {
         return developers;
     }
 
-    public List<String> getPublishers() {
+    public List<Publishers> getPublishers() {
         return publishers;
     }
 
@@ -117,5 +130,12 @@ public class Game {
      */
     public List<Category> getCategories() {
         return categories;
+    }
+
+    /**
+     * @return a list of variables only if you embed this resource on query
+     */
+    public List<Variable> getVariables() {
+        return variables;
     }
 }

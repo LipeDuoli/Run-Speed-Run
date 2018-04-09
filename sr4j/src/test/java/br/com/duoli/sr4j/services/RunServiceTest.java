@@ -37,4 +37,11 @@ public class RunServiceTest {
         assertNotNull(run.getPlatform());
     }
 
+    @Test
+    public void testDescerializeSimgleRun_embedAll() {
+        Run run = SpeedRun4jClient.getRun().withId(runId).embedResource(Embed.Runs.All).fetch();
+
+        assertNotNull(run.getPlatform());
+    }
+
 }

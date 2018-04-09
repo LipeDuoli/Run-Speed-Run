@@ -71,17 +71,31 @@ public class GameServiceTest {
     }
 
     @Test
-    public void testDescerializeGamesList_bulkSearch(){
+    public void testDescerializeGamesList_bulkSearch() {
         PageableList<Game> games = SpeedRun4jClient.getGame().bulk().fetch();
 
         assertNotNull(games.getData());
     }
 
     @Test
-    public void testDescerializeGame_embedCategory(){
+    public void testDescerializeGame_embedCategory() {
         Game game = SpeedRun4jClient.getGame().withId(gameId).embedResource(Embed.Games.CATEGORIES).fetch();
 
         assertNotNull(game.getCategories());
+    }
+
+    @Test
+    public void testDescerializeGame_embedRegion() {
+        Game game = SpeedRun4jClient.getGame().withId(gameId).embedResource(Embed.Games.REGIONS).fetch();
+
+        assertNotNull(game.getRegions());
+    }
+
+    @Test
+    public void testDescerializeGame_embedAll() {
+        Game game = SpeedRun4jClient.getGame().withId(gameId).embedResource(Embed.Games.ALL).fetch();
+
+        assertNotNull(game);
     }
 
     @Test

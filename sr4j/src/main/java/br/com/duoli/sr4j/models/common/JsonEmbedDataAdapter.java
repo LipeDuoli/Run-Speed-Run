@@ -1,5 +1,6 @@
 package br.com.duoli.sr4j.models.common;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -19,12 +20,28 @@ public class JsonEmbedDataAdapter<T> implements JsonDeserializer<T> {
 
         if (json.isJsonObject()) {
             JsonObject envelope = json.getAsJsonObject();
+            if (isDataArray(envelope)){
+                return null;
+            }
             JsonObject data = envelope.getAsJsonObject("data");
             result = jsc.deserialize(data, typeOfT);
         } else {
-            result = jsc.deserialize(json, typeOfT);
-        }
+            String id = json.getAsString();
 
+            JsonObject obj = new JsonObject();
+            obj.addProperty("id", id);
+
+            result = jsc.deserialize(obj, typeOfT);
+        }
         return result;
+    }
+
+    private boolean isDataArray(JsonObject envelope) {
+        try {
+            JsonArray data = envelope.getAsJsonArray("data");
+            return data.isJsonArray();
+        } catch (ClassCastException e) {
+            return false;
+        }
     }
 }

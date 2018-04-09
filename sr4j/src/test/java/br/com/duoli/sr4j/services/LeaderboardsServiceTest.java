@@ -25,8 +25,8 @@ public class LeaderboardsServiceTest {
                 .toCategory(categoryId).fetch();
 
         assertNotNull(leaderboard);
-        assertEquals(gameId, leaderboard.getGame());
-        assertEquals(categoryId, leaderboard.getCategory());
+        assertEquals(gameId, leaderboard.getGame().getId());
+        assertEquals(categoryId, leaderboard.getCategory().getId());
     }
 
     @Test
@@ -37,14 +37,14 @@ public class LeaderboardsServiceTest {
                 .toLevel(levelId).fetch();
 
         assertNotNull(leaderboard);
-        assertEquals(gameId, leaderboard.getGame());
-        assertEquals(categoryLevelId, leaderboard.getCategory());
-        assertEquals(levelId, leaderboard.getLevel());
+        assertEquals(gameId, leaderboard.getGame().getId());
+        assertEquals(categoryLevelId, leaderboard.getCategory().getId());
+        assertEquals(levelId, leaderboard.getLevel().getId());
     }
 
     @Test(expected = SearchException.class)
     public void testLeaderbordsSearch_noCategory_throwException() {
-        Leaderboard leaderboard = SpeedRun4jClient.getLeaderbard().toGame(gameId).fetch();
+        SpeedRun4jClient.getLeaderbard().toGame(gameId).fetch();
     }
 
     @Test
@@ -55,6 +55,16 @@ public class LeaderboardsServiceTest {
                 .embedResource(Embed.LeaderBoards.PLAYERS).fetch();
 
         assertNotNull(leaderboard.getPlayers());
+    }
+
+    @Test
+    public void testDescerializeLeaderboard_embedAll() {
+        Leaderboard leaderboard = SpeedRun4jClient.getLeaderbard()
+                .toGame(gameId)
+                .toCategory(categoryId)
+                .embedResource(Embed.LeaderBoards.ALL).fetch();
+
+        assertNotNull(leaderboard);
     }
 
 }
