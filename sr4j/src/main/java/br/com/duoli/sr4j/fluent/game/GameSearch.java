@@ -6,6 +6,7 @@ import java.util.Map;
 
 import br.com.duoli.sr4j.exceptions.SearchException;
 import br.com.duoli.sr4j.fluent.common.Embed;
+import br.com.duoli.sr4j.fluent.common.OrderBy;
 import br.com.duoli.sr4j.models.common.PageableList;
 import br.com.duoli.sr4j.models.games.Game;
 import br.com.duoli.sr4j.services.GameService;
@@ -101,7 +102,7 @@ public class GameSearch implements IGameParams {
     @Override
     public IGameParams embedResource(Embed.Games... resources) {
         StringBuilder builder = new StringBuilder();
-        for (Embed.Games r: resources) {
+        for (Embed.Games r : resources) {
             builder.append(r.toString()).append(",");
         }
         queryParams.put("embed", builder.toString());
@@ -112,7 +113,7 @@ public class GameSearch implements IGameParams {
     public PageableList<Game> fetch() {
         try {
             Response<PageableList<Game>> response = gameService.getAll(queryParams).execute();
-            if (!response.isSuccessful()){
+            if (!response.isSuccessful()) {
                 throw new SearchException(ErrorUtil.parseError(response).getMessage());
             }
             return response.body();
@@ -120,5 +121,23 @@ public class GameSearch implements IGameParams {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public IGameParams orderBy(OrderBy.Games orderBy) {
+        queryParams.put("orderby", orderBy.toString());
+        return this;
+    }
+
+    @Override
+    public IGameParams asc() {
+        queryParams.put("direction", "asc");
+        return this;
+    }
+
+    @Override
+    public IGameParams desc() {
+        queryParams.put("direction", "desc");
+        return this;
     }
 }

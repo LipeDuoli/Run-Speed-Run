@@ -6,6 +6,7 @@ import java.util.Map;
 
 import br.com.duoli.sr4j.exceptions.SearchException;
 import br.com.duoli.sr4j.fluent.common.Embed;
+import br.com.duoli.sr4j.fluent.common.OrderBy;
 import br.com.duoli.sr4j.models.common.PageableList;
 import br.com.duoli.sr4j.models.runs.Run;
 import br.com.duoli.sr4j.models.runs.RunStatusType;
@@ -111,6 +112,24 @@ public class RunSearch implements IRunParams {
             }
             queryParams.put("embed", builder.toString());
         }
+        return this;
+    }
+
+    @Override
+    public IRunParams orderBy(OrderBy.Runs orderBy) {
+        queryParams.put("orderby", orderBy.toString());
+        return this;
+    }
+
+    @Override
+    public IRunParams asc() {
+        queryParams.put("direction", "asc");
+        return this;
+    }
+
+    @Override
+    public IRunParams desc() {
+        queryParams.put("direction", "desc");
         return this;
     }
 }

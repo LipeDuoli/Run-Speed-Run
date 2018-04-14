@@ -1,6 +1,7 @@
 package br.com.duoli.sr4j.fluent.game;
 
 import br.com.duoli.sr4j.fluent.common.Embed;
+import br.com.duoli.sr4j.fluent.common.OrderBy;
 import br.com.duoli.sr4j.models.common.PageableList;
 import br.com.duoli.sr4j.models.games.Game;
 
@@ -33,5 +34,11 @@ public interface IGameParams {
     IGameParams embedResource(Embed.Games... resources);
 
     PageableList<Game> fetch();
+
+    IGameParams orderBy(OrderBy.Games orderBy);
+
+    IGameParams asc();
+
+    IGameParams desc();
 
 }

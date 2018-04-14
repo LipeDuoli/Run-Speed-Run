@@ -26,7 +26,6 @@ public class LeaderBoardsSearch implements ILeaderboardsParams {
         this.queryParams = new HashMap<>();
     }
 
-
     @Override
     public ILeaderboardsParams toGame(String gameId) {
         this.gameId = gameId;
@@ -132,9 +131,9 @@ public class LeaderBoardsSearch implements ILeaderboardsParams {
 
     @Override
     public ILeaderboardsParams embedResource(Embed.LeaderBoards... resources) {
-        if (resources.length > 0){
+        if (resources.length > 0) {
             StringBuilder builder = new StringBuilder();
-            for (Embed.LeaderBoards r: resources) {
+            for (Embed.LeaderBoards r : resources) {
                 builder.append(r.toString()).append(",");
             }
             queryParams.put("embed", builder.toString());
