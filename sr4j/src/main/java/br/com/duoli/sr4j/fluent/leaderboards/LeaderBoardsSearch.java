@@ -49,7 +49,6 @@ public class LeaderBoardsSearch implements ILeaderboardsParams {
         if (gameId == null || categoryId == null) {
             throw new SearchException("Inform at least a Game AND Category");
         }
-        Leaderboard leaderboard = null;
         Response<Envelope<Leaderboard>> response;
         try {
             if (levelId == null) {
@@ -61,14 +60,15 @@ public class LeaderBoardsSearch implements ILeaderboardsParams {
                         .getLevelLeaderBoards(gameId, categoryId, levelId, queryParams)
                         .execute();
             }
+
             if (!response.isSuccessful()) {
                 throw new SearchException(ErrorUtil.parseError(response).getMessage());
             }
-            leaderboard = response.body().getData();
-        } catch (IOException e) {
+            return response.body().getData();
+        } catch (SearchException | IOException e) {
             e.printStackTrace();
+            return null;
         }
-        return leaderboard;
     }
 
     @Override

@@ -15,6 +15,7 @@ import br.com.duoli.sr4j.models.variables.Variable;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class GameServiceTest {
 
@@ -92,41 +93,16 @@ public class GameServiceTest {
     }
 
     @Test
+    public void shouldReturnNullWithWrongId(){
+        Game game = SpeedRun4jClient.getGame().withId("12311").fetch();
+
+        assertNull(game);
+    }
+
+    @Test
     public void testDescerializeGame_embedAll() {
         Game game = SpeedRun4jClient.getGame().withId(gameId).embedResource(Embed.Games.ALL).fetch();
 
         assertNotNull(game);
     }
-
-    @Test
-    public void random() {
-        List<Game> games = SpeedRun4jClient.getGame().withName("Super Mario Bros").embedResource(Embed.Games.CATEGORIES).fetch().getData();
-
-        System.out.println("Results for Super Mario Bros search: " + games.size());
-        for (Game game : games) {
-            System.out.print(game.getNames().getInternational() + " | ");
-        }
-        System.out.println("");
-        System.out.println("Get First");
-
-        Game game = games.get(0);
-        System.out.println("Game ID: " + game.getId());
-        System.out.println("Game Name: " + game.getNames().getInternational());
-        System.out.println("Game Release Date: " + game.getReleaseDate().toString());
-        System.out.println("Game Cover: " + game.getAssets().getCoverLarge().getUri());
-
-        List<Category> categories = game.getCategories();
-        System.out.println("Game has " + categories.size() + " categories");
-        for (Category category : categories) {
-            System.out.print(category.getName() + " | ");
-        }
-        System.out.println("");
-        System.out.println("Get First category");
-
-        Category category = categories.get(0);
-        System.out.println("Category id: " + category.getId());
-        System.out.println("Category Name: " + category.getName());
-
-    }
-
 }

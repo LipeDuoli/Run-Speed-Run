@@ -117,9 +117,9 @@ public class GameSearch implements IGameParams {
                 throw new SearchException(ErrorUtil.parseError(response).getMessage());
             }
             return response.body();
-        } catch (IOException e) {
+        } catch (SearchException | IOException e) {
             e.printStackTrace();
-            return null;
+            return new PageableList<>();
         }
     }
 

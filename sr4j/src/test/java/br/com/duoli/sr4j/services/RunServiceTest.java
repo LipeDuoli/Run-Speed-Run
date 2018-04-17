@@ -43,5 +43,4 @@ public class RunServiceTest {
 
         assertNotNull(run.getPlatform());
     }
-
 }

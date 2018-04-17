@@ -1,6 +1,7 @@
 package br.com.duoli.sr4j.fluent.game;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.duoli.sr4j.exceptions.SearchException;
@@ -28,9 +29,9 @@ class GameSearchCategory implements IGameCategories {
                 throw new SearchException(ErrorUtil.parseError(response).getMessage());
             }
             return response.body().getData();
-        } catch (IOException e) {
+        } catch (SearchException | IOException e) {
             e.printStackTrace();
-            return null;
+            return Collections.emptyList();
         }
     }
 }
