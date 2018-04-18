@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">SpeedRun App</string>
+    <string name="app_name">Run Speed, Run</string>
+    <string name="title_activity_main">@string/app_name</string>
+
+    <string name="navigation_drawer_open">Open navigation menu</string>
+    <string name="navigation_drawer_close">Close navigation menu</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_latest">Latest Runs</string>
+    <string name="nav_games">Games</string>
+    <string name="nav_favorites">Favorites</string>
+
+    <string name="action_search">Search</string>
 </resources>
