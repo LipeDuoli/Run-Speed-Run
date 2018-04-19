@@ -11,6 +11,7 @@ public class User {
 
     private String id;
     private UserNames names;
+    private String name;
     private String weblink;
     @SerializedName("name-style")
     private UserNameStyle nameStyle;
@@ -74,5 +75,16 @@ public class User {
 
     public List<Link> getLinks() {
         return links;
+    }
+
+    public String getName() {
+        if (name == null){
+            if (names != null){
+                return names.getInternational();
+            } else {
+                return "";
+            }
+        }
+        return name;
     }
 }

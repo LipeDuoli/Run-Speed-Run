@@ -147,6 +147,12 @@ public class Embed {
                 return "level";
             }
         },
+        PLAYERS {
+            @Override
+            public String toString() {
+                return "players";
+            }
+        },
         REGION {
             @Override
             public String toString() {
@@ -165,6 +171,7 @@ public class Embed {
                 return GAME + "," +
                         CATEGORY + "," +
                         LEVEL + "," +
+                        PLAYERS + "," +
                         REGION + "," +
                         PLATAFORM;
             }

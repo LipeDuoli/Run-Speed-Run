@@ -1,6 +1,6 @@
 package br.com.duoli.sr4j.models.variables;
 
-class VariableValue {
+public class VariableValue {
 
     private String label;
     private String rules;

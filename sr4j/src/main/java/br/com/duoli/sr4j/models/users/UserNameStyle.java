@@ -2,7 +2,7 @@ package br.com.duoli.sr4j.models.users;
 
 import com.google.gson.annotations.SerializedName;
 
-class UserNameStyle {
+public class UserNameStyle {
 
     private UserColorType style;
     private UserColor color;

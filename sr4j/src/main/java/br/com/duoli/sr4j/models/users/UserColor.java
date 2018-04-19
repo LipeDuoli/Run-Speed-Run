@@ -1,6 +1,6 @@
 package br.com.duoli.sr4j.models.users;
 
-class UserColor {
+public class UserColor {
 
     private String light;
     private String dark;

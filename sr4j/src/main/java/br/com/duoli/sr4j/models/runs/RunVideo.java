@@ -4,7 +4,7 @@ import java.util.List;
 
 import br.com.duoli.sr4j.models.common.Link;
 
-class RunVideo {
+public class RunVideo {
 
     private String text;
     private List<Link> links;

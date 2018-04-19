@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Map;
 
-class VariableValues {
+public class VariableValues {
 
     @SerializedName("default")
     private String _default;

@@ -1,6 +1,6 @@
 package br.com.duoli.sr4j.models.categories;
 
-class CategoryPlayers {
+public class CategoryPlayers {
 
     private CategoryPlayerTypes type;
     private int value;

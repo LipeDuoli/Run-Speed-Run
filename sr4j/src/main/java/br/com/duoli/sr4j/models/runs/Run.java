@@ -8,11 +8,13 @@ import java.util.Map;
 
 import br.com.duoli.sr4j.models.categories.Category;
 import br.com.duoli.sr4j.models.common.JsonEmbedDataAdapter;
+import br.com.duoli.sr4j.models.common.JsonEmbedDataUserAdapter;
 import br.com.duoli.sr4j.models.common.Link;
 import br.com.duoli.sr4j.models.games.Game;
 import br.com.duoli.sr4j.models.levels.Level;
 import br.com.duoli.sr4j.models.platforms.Platform;
 import br.com.duoli.sr4j.models.regions.Region;
+import br.com.duoli.sr4j.models.users.User;
 
 public class Run {
 
@@ -27,7 +29,8 @@ public class Run {
     private RunVideo video;
     private String comment;
     private RunStatus status;
-    private List<RunPlayer> players;
+    @JsonAdapter(JsonEmbedDataUserAdapter.class)
+    private List<User> players;
     private Date date;
     private String submitted;
     private RunTimes times;
@@ -72,7 +75,7 @@ public class Run {
         return status;
     }
 
-    public List<RunPlayer> getPlayers() {
+    public List<User> getPlayers() {
         return players;
     }
 

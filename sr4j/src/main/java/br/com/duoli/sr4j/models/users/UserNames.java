@@ -1,6 +1,6 @@
 package br.com.duoli.sr4j.models.users;
 
-class UserNames {
+public class UserNames {
 
     private String international;
     private String japanese;

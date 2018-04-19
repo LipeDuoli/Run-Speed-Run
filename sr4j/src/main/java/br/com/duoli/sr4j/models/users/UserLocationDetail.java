@@ -1,6 +1,6 @@
 package br.com.duoli.sr4j.models.users;
 
-class UserLocationDetail {
+public class UserLocationDetail {
 
     private String code;
     private UserLocationDetailName names;

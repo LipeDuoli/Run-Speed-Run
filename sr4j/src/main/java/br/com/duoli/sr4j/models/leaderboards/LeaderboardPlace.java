@@ -2,7 +2,7 @@ package br.com.duoli.sr4j.models.leaderboards;
 
 import br.com.duoli.sr4j.models.runs.Run;
 
-class LeaderboardPlace {
+public class LeaderboardPlace {
 
     private int place;
     private Run run;

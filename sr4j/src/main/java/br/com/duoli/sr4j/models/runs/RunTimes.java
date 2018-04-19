@@ -2,7 +2,7 @@ package br.com.duoli.sr4j.models.runs;
 
 import com.google.gson.annotations.SerializedName;
 
-class RunTimes {
+public class RunTimes {
 
     @SerializedName("primary")
     private String primary;

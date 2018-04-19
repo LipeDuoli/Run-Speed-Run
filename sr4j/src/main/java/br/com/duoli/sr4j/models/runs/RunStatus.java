@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-class RunStatus {
+public class RunStatus {
 
     private RunStatusType status;
     private String examiner;

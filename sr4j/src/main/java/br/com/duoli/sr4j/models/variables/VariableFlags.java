@@ -1,6 +1,6 @@
 package br.com.duoli.sr4j.models.variables;
 
-class VariableFlags {
+public class VariableFlags {
 
     private boolean miscellaneous;
 

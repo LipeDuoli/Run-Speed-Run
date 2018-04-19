@@ -1,6 +1,6 @@
 package br.com.duoli.sr4j.models.variables;
 
-class VariableScope {
+public class VariableScope {
 
     private VariableScopeTypes type;
 
