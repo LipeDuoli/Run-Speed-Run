@@ -28,6 +28,14 @@ public class MainActivity extends AppCompatActivity
 
         configureToolbar();
         configureNavigationDrawer();
+        loadLatestRunsFragment();
+    }
+
+    private void loadLatestRunsFragment() {
+        LatestRunsFragment runsFragment = LatestRunsFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentFrame, runsFragment)
+                .commit();
     }
 
     private void configureToolbar() {
