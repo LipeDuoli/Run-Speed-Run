@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +27,8 @@ public class LatestRunsFragment extends Fragment implements
     private static final int LOADER_ID = 1000;
 
     private FragmentMainBinding mBinding;
-    private LatestRunAdapter runAdapter;
-    private LatestRunContract.Presenter runPresenter;
+    private LatestRunAdapter mRunAdapter;
+    private LatestRunContract.Presenter mRunPresenter;
 
     public static LatestRunsFragment newInstance() {
         LatestRunsFragment fragment = new LatestRunsFragment();
@@ -55,24 +54,34 @@ public class LatestRunsFragment extends Fragment implements
     }
 
     private void configureRecyclerView() {
-        runAdapter = new LatestRunAdapter(getContext(), this);
+        mRunAdapter = new LatestRunAdapter(getContext(), this);
 
-        mBinding.recyclerView.setAdapter(runAdapter);
+        mBinding.recyclerView.setAdapter(mRunAdapter);
         mBinding.recyclerView.setHasFixedSize(true);
         mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override
     public void displayRuns(List<Run> runList) {
-        runAdapter.setRuns(runList);
-        mBinding.recyclerView.setVisibility(View.VISIBLE);
-        mBinding.loadingLayout.setVisibility(View.GONE);
+        mRunAdapter.setRuns(runList);
     }
 
     @Override
-    public void showLoading() {
+    public void showLoadingLayout() {
         mBinding.loadingLayout.setVisibility(View.VISIBLE);
-        mBinding.recyclerView.setVisibility(View.INVISIBLE);
+        mBinding.recyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideLoadingLayout() {
+        mBinding.loadingLayout.setVisibility(View.GONE);
+        mBinding.recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onDestroy() {
+        mRunPresenter.destroy();
+        super.onDestroy();
     }
 
     @Override
@@ -83,21 +92,19 @@ public class LatestRunsFragment extends Fragment implements
     @NonNull
     @Override
     public Loader<LatestRunContract.Presenter> onCreateLoader(int id, @Nullable Bundle args) {
-        Log.d("LatestRunPresenter", "loader create");
-        return new LatestRunLoader(getContext(), this);
+        return new LatestRunLoader(getContext());
     }
 
     @Override
     public void onLoadFinished(@NonNull Loader<LatestRunContract.Presenter> loader, LatestRunContract.Presenter data) {
-        Log.d("LatestRunPresenter", "loader finish");
-        this.runPresenter = data;
-        runPresenter.loadLatestRuns();
+        this.mRunPresenter = data;
+        mRunPresenter.setView(this);
+        mRunPresenter.loadLatestRuns();
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<LatestRunContract.Presenter> loader) {
-        Log.d("apploader", "loader reset");
-        runPresenter.destroy();
-        runPresenter = null;
+        mRunPresenter.destroy();
+        mRunPresenter = null;
     }
 }

@@ -13,12 +13,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class LatestRunLoader extends Loader<LatestRunContract.Presenter> {
 
-    LatestRunContract.Presenter mPresenter;
-    private LatestRunContract.View mView;
+    private LatestRunContract.Presenter mPresenter;
 
-    public LatestRunLoader(@NonNull Context context, LatestRunContract.View view) {
+    public LatestRunLoader(@NonNull Context context) {
         super(context);
-        mView = view;
     }
 
     @Override
@@ -32,7 +30,7 @@ public class LatestRunLoader extends Loader<LatestRunContract.Presenter> {
 
     @Override
     protected void onForceLoad() {
-        deliverResult(new LatestRunPresenter(mView, new RunsRepositoryImpl(), AndroidSchedulers.mainThread()));
+        deliverResult(new LatestRunPresenter(new RunsRepositoryImpl(), AndroidSchedulers.mainThread()));
     }
 
     @Override

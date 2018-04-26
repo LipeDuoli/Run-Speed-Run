@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity
 
         configureToolbar();
         configureNavigationDrawer();
-        loadLatestRunsFragment();
+
+        if (savedInstanceState == null)
+            loadLatestRunsFragment();
     }
 
     private void loadLatestRunsFragment() {
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_latest:
                 //TODO load latest runs fragment
                 break;

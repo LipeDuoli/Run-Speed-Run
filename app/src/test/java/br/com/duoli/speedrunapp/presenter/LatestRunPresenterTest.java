@@ -38,7 +38,8 @@ public class LatestRunPresenterTest {
 
     @Before
     public void setUp() {
-        presenter = new LatestRunPresenter(view, runsRepository, Schedulers.trampoline());
+        presenter = new LatestRunPresenter(runsRepository, Schedulers.trampoline());
+        presenter.setView(view);
         RxJavaPlugins.setIoSchedulerHandler(new Function<Scheduler, Scheduler>() {
             @Override
             public Scheduler apply(Scheduler scheduler) throws Exception {
@@ -58,8 +59,25 @@ public class LatestRunPresenterTest {
 
         presenter.loadLatestRuns();
 
-        verify(view).showLoading();
         verify(view).displayRuns(runList);
+    }
+
+    @Test
+    public void shouldDisplayLoadingViewWhenLoadRuns(){
+        when(runsRepository.getLatestRuns()).thenReturn(Single.just(runList));
+
+        presenter.loadLatestRuns();
+
+        verify(view).showLoadingLayout();
+    }
+
+    @Test
+    public void shouldHideLoadingViewWhenLoadRunsFinish(){
+        when(runsRepository.getLatestRuns()).thenReturn(Single.just(runList));
+
+        presenter.loadLatestRuns();
+
+        verify(view).hideLoadingLayout();
     }
 
 }

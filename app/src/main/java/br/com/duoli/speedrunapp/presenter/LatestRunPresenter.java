@@ -21,22 +21,25 @@ public class LatestRunPresenter implements LatestRunContract.Presenter {
     private Scheduler mScheduler;
     private List<Run> mRuns;
 
-    public LatestRunPresenter(LatestRunContract.View view, RunsRepository runsRepository, Scheduler scheduler) {
-        mView = view;
+    public LatestRunPresenter(RunsRepository runsRepository, Scheduler scheduler) {
         mRunsRepository = runsRepository;
         mScheduler = scheduler;
     }
 
     @Override
     public void loadLatestRuns() {
-        mView.showLoading();
-        if (mRuns != null){
-            Log.d(TAG, "loadLatestRuns: load saved " + toString());
+        mView.showLoadingLayout();
+        if (mRuns != null) {
             mView.displayRuns(mRuns);
+            mView.hideLoadingLayout();
         } else {
-            Log.d(TAG, "loadLatestRuns: load net " + toString());
             loadRuns();
         }
+    }
+
+    @Override
+    public void setView(LatestRunContract.View view) {
+        this.mView = view;
     }
 
     private void loadRuns() {
@@ -48,11 +51,12 @@ public class LatestRunPresenter implements LatestRunContract.Presenter {
                     public void onSuccess(List<Run> runs) {
                         mRuns = runs;
                         mView.displayRuns(mRuns);
+                        mView.hideLoadingLayout();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e(TAG, "loadLatestRuns: " + e.getMessage());
+                        Log.e(TAG, "loadRuns: " + e.getMessage());
                         e.printStackTrace();
                     }
                 }));

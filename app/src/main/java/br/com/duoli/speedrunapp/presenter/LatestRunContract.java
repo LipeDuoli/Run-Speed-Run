@@ -10,12 +10,16 @@ public interface LatestRunContract {
 
         void displayRuns(List<Run> runList);
 
-        void showLoading();
+        void showLoadingLayout();
+
+        void hideLoadingLayout();
     }
 
     interface Presenter {
 
         void loadLatestRuns();
+
+        void setView(LatestRunContract.View view);
 
         void destroy();
     }
