@@ -3,65 +3,86 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.constraint.ConstraintLayout
+    <data>
+
+        <variable
+            name="run"
+            type="br.com.duoli.sr4j.models.runs.Run" />
+    </data>
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="@dimen/latest_run_card_height"
+        android:layout_marginBottom="1dp"
+        app:contentPadding="@dimen/latest_run_card_padding">
 
-        <ImageView
-            android:id="@+id/game_image"
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/colorAccent" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/game_name"
-            style="@style/TextAppearance.AppCompat.Title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/game_image"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Game Name" />
+            <ImageView
+                android:id="@+id/game_image"
+                android:layout_width="@dimen/latest_run_cover_width"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:cover="@{run.game.assets.coverMedium.uri}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@color/colorAccent" />
 
-        <TextView
-            android:id="@+id/game_category"
-            style="@style/TextAppearance.AppCompat.Subhead"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/game_image"
-            app:layout_constraintTop_toBottomOf="@+id/game_name"
-            tools:text="Game Category" />
+            <TextView
+                android:id="@+id/game_name"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-light"
+                android:maxLines="2"
+                android:text="@{run.game.names.international}"
+                app:layout_constraintBottom_toTopOf="@+id/game_category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/game_image"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Game Name" />
 
-        <TextView
-            android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/game_image"
-            app:layout_constraintTop_toBottomOf="@+id/game_category"
-            tools:text="User Name" />
+            <TextView
+                android:id="@+id/game_category"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-light"
+                android:maxLines="1"
+                android:text="@{run.category.name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/game_image"
+                app:layout_constraintTop_toBottomOf="@+id/game_name"
+                tools:text="Game Category" />
 
-        <TextView
-            android:id="@+id/user_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/user_name"
-            app:layout_constraintStart_toEndOf="@+id/user_name"
-            tools:text="User Time" />
+            <TextView
+                android:id="@+id/user_time"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/game_image"
+                app:runTime="@{run.times.primary}"
+                app:userName="@{run.players[0].name}"
+                tools:text="1h 30m by user" />
 
-    </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.CardView>
+
 </layout>

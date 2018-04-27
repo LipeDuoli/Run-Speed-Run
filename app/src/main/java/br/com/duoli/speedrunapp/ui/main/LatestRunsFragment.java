@@ -54,7 +54,7 @@ public class LatestRunsFragment extends Fragment implements
     }
 
     private void configureRecyclerView() {
-        mRunAdapter = new LatestRunAdapter(getContext(), this);
+        mRunAdapter = new LatestRunAdapter(this);
 
         mBinding.recyclerView.setAdapter(mRunAdapter);
         mBinding.recyclerView.setHasFixedSize(true);

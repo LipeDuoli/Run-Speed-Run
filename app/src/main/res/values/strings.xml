@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Run Speed, Run</string>
     <string name="title_activity_main">@string/app_name</string>
+    <string name="action_search">Search</string>
 
     <string name="navigation_drawer_open">Open navigation menu</string>
     <string name="navigation_drawer_close">Close navigation menu</string>
@@ -9,6 +10,5 @@
     <string name="nav_games">Games</string>
     <string name="nav_favorites">Favorites</string>
 
-    <string name="action_search">Search</string>
-
+    <string name="latest_run_time_format">%1$s <b>by</b> %2$s</string>
 </resources>
