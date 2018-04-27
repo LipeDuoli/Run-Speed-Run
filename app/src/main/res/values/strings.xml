@@ -11,4 +11,5 @@
     <string name="nav_favorites">Favorites</string>
 
     <string name="latest_run_time_format">%1$s <b>by</b> %2$s</string>
+    <string name="loading_text">Loading Games</string>
 </resources>
