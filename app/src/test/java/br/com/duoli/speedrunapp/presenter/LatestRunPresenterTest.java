@@ -9,6 +9,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.duoli.speedrunapp.repository.RunsRepository;
@@ -78,6 +79,15 @@ public class LatestRunPresenterTest {
         presenter.loadLatestRuns();
 
         verify(view).hideLoadingLayout();
+    }
+
+    @Test
+    public void shouldDisplayNotFountLayoutWithEmptyResult(){
+        when(runsRepository.getLatestRuns()).thenReturn(Single.just(Collections.<Run>emptyList()));
+
+        presenter.loadLatestRuns();
+
+        verify(view).displayNotFoundLayout();
     }
 
 }

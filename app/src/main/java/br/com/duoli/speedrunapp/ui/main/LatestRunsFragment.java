@@ -69,13 +69,21 @@ public class LatestRunsFragment extends Fragment implements
     @Override
     public void showLoadingLayout() {
         mBinding.loadingLayout.setVisibility(View.VISIBLE);
-        mBinding.recyclerView.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoadingLayout() {
         mBinding.loadingLayout.setVisibility(View.GONE);
-        mBinding.recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void displayNotFoundLayout() {
+        mBinding.notFoundLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideNotFoundLayout() {
+        mBinding.notFoundLayout.setVisibility(View.GONE);
     }
 
     @Override

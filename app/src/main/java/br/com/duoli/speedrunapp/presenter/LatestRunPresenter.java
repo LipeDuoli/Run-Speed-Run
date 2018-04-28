@@ -28,7 +28,6 @@ public class LatestRunPresenter implements LatestRunContract.Presenter {
 
     @Override
     public void loadLatestRuns() {
-        mView.showLoadingLayout();
         if (mRuns != null) {
             mView.displayRuns(mRuns);
             mView.hideLoadingLayout();
@@ -43,6 +42,8 @@ public class LatestRunPresenter implements LatestRunContract.Presenter {
     }
 
     private void loadRuns() {
+        mView.showLoadingLayout();
+        mView.hideNotFoundLayout();
         disposable.add(mRunsRepository.getLatestRuns()
                 .subscribeOn(Schedulers.io())
                 .observeOn(mScheduler)
@@ -50,8 +51,12 @@ public class LatestRunPresenter implements LatestRunContract.Presenter {
                     @Override
                     public void onSuccess(List<Run> runs) {
                         mRuns = runs;
-                        mView.displayRuns(mRuns);
                         mView.hideLoadingLayout();
+                        if (mRuns.size() > 0){
+                            mView.displayRuns(mRuns);
+                        } else {
+                            mView.displayNotFoundLayout();
+                        }
                     }
 
                     @Override

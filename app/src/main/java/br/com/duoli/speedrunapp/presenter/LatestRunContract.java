@@ -13,6 +13,11 @@ public interface LatestRunContract {
         void showLoadingLayout();
 
         void hideLoadingLayout();
+
+        void displayNotFoundLayout();
+
+        void hideNotFoundLayout();
+
     }
 
     interface Presenter {
