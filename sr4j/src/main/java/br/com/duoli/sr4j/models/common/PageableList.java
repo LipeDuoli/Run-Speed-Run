@@ -15,4 +15,11 @@ public class PageableList<T> {
     public Pagination getPagination() {
         return pagination;
     }
+
+    public PageableList() {
+    }
+
+    public PageableList(List<T> data) {
+        this.data = data;
+    }
 }
