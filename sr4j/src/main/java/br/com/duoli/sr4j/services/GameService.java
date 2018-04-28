@@ -36,9 +36,9 @@ public interface GameService {
     Call<EnvelopeList<Variable>> variablesForId(@Path("id") String gameId);
 
     @GET(GAME_WITH_ID_PATH + "/derived-games")
-    Call<PageableList<Game>> derivedGamesForId(@Path("id") String gameId);
+    Call<PageableList<Game>> derivedGamesForId(@Path("id") String gameId, @QueryMap Map<String, String> queryParams);
 
     @GET(GAME_WITH_ID_PATH + "/records")
-    Call<PageableList<Leaderboard>> recordsForId(@Path("id") String gameId);
+    Call<PageableList<Leaderboard>> recordsForId(@Path("id") String gameId, @QueryMap Map<String, String> queryParams);
 
 }

@@ -41,4 +41,8 @@ public interface IGameParams {
 
     IGameParams desc();
 
+    IGameParams max(int itens);
+
+    IGameParams offset(int page);
+
 }

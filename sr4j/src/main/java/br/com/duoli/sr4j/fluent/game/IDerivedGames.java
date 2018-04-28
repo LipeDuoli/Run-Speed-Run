@@ -6,4 +6,8 @@ import br.com.duoli.sr4j.models.games.Game;
 public interface IDerivedGames {
 
     PageableList<Game> fetch();
+
+    IDerivedGames max(int itens);
+
+    IDerivedGames offset(int page);
 }

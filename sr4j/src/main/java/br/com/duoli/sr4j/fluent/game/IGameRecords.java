@@ -6,4 +6,8 @@ import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
 public interface IGameRecords {
 
     PageableList<Leaderboard> fetch();
+
+    IGameRecords max(int itens);
+
+    IGameRecords offset(int page);
 }

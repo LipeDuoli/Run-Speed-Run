@@ -130,4 +130,16 @@ public class RunSearch implements IRunParams {
         queryParams.put("direction", "desc");
         return this;
     }
+
+    @Override
+    public IRunParams max(int itens) {
+        queryParams.put("max", String.valueOf(itens));
+        return this;
+    }
+
+    @Override
+    public IRunParams offset(int page) {
+        queryParams.put("offset", String.valueOf(page));
+        return this;
+    }
 }

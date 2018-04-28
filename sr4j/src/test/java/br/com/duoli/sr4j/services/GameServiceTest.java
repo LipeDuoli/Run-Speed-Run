@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.util.List;
 
 import br.com.duoli.sr4j.SpeedRun4jClient;
+import br.com.duoli.sr4j.exceptions.SearchException;
 import br.com.duoli.sr4j.fluent.common.Embed;
 import br.com.duoli.sr4j.models.categories.Category;
 import br.com.duoli.sr4j.models.common.PageableList;
@@ -15,7 +16,6 @@ import br.com.duoli.sr4j.models.variables.Variable;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 public class GameServiceTest {
 
@@ -92,11 +92,9 @@ public class GameServiceTest {
         assertNotNull(game.getRegions());
     }
 
-    @Test
-    public void shouldReturnNullWithWrongId(){
-        Game game = SpeedRun4jClient.getGame().withId("12311").fetch();
-
-        assertNull(game);
+    @Test(expected = SearchException.class)
+    public void shouldThrownErrorWithWrongId(){
+        SpeedRun4jClient.getGame().withId("12311").fetch();
     }
 
     @Test

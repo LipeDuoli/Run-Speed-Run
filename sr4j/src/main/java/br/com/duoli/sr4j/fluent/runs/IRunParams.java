@@ -37,4 +37,8 @@ public interface IRunParams {
     IRunParams asc();
 
     IRunParams desc();
+
+    IRunParams max(int itens);
+
+    IRunParams offset(int page);
 }

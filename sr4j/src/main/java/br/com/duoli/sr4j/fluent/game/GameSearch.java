@@ -139,4 +139,16 @@ public class GameSearch implements IGameParams {
         queryParams.put("direction", "desc");
         return this;
     }
+
+    @Override
+    public IGameParams max(int itens) {
+        queryParams.put("max", String.valueOf(itens));
+        return this;
+    }
+
+    @Override
+    public IGameParams offset(int page) {
+        queryParams.put("offset", String.valueOf(page));
+        return this;
+    }
 }
