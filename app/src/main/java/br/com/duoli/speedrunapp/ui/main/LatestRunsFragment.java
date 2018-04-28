@@ -64,26 +64,49 @@ public class LatestRunsFragment extends Fragment implements
     @Override
     public void displayRuns(List<Run> runList) {
         mRunAdapter.setRuns(runList);
+        mBinding.recyclerView.setVisibility(View.VISIBLE);
+        hideError();
+        hideLoading();
+        hideNotFound();
     }
 
     @Override
-    public void showLoadingLayout() {
+    public void displayLoading() {
         mBinding.loadingLayout.setVisibility(View.VISIBLE);
+        mBinding.recyclerView.setVisibility(View.GONE);
+        hideNotFound();
+        hideError();
     }
 
     @Override
-    public void hideLoadingLayout() {
+    public void hideLoading() {
         mBinding.loadingLayout.setVisibility(View.GONE);
     }
 
     @Override
-    public void displayNotFoundLayout() {
+    public void displayNotFound() {
         mBinding.notFoundLayout.setVisibility(View.VISIBLE);
+        mBinding.recyclerView.setVisibility(View.GONE);
+        hideError();
+        hideLoading();
     }
 
     @Override
-    public void hideNotFoundLayout() {
+    public void hideNotFound() {
         mBinding.notFoundLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void displayError() {
+        mBinding.errorLayout.getRoot().setVisibility(View.VISIBLE);
+        mBinding.recyclerView.setVisibility(View.GONE);
+        hideLoading();
+        hideNotFound();
+    }
+
+    @Override
+    public void hideError() {
+        mBinding.errorLayout.getRoot().setVisibility(View.GONE);
     }
 
     @Override
@@ -107,7 +130,8 @@ public class LatestRunsFragment extends Fragment implements
     public void onLoadFinished(@NonNull Loader<LatestRunContract.Presenter> loader, LatestRunContract.Presenter data) {
         this.mRunPresenter = data;
         mRunPresenter.setView(this);
-        mRunPresenter.loadLatestRuns();
+        mRunPresenter.loadData();
+        mBinding.errorLayout.setPresenter(mRunPresenter);
     }
 
     @Override

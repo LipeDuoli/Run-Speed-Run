@@ -17,12 +17,17 @@
         <include
             android:id="@+id/loading_layout"
             layout="@layout/loading_layout"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <include
             android:id="@+id/not_found_layout"
             layout="@layout/not_found_layout"
-            android:visibility="gone"/>
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/error_layout"
+            layout="@layout/error_layout"
+            android:visibility="gone" />
 
     </FrameLayout>
 

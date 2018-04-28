@@ -58,7 +58,7 @@ public class LatestRunPresenterTest {
     public void shouldPassRunsToView() {
         when(runsRepository.getLatestRuns()).thenReturn(Single.just(runList));
 
-        presenter.loadLatestRuns();
+        presenter.loadData();
 
         verify(view).displayRuns(runList);
     }
@@ -67,27 +67,27 @@ public class LatestRunPresenterTest {
     public void shouldDisplayLoadingViewWhenLoadRuns(){
         when(runsRepository.getLatestRuns()).thenReturn(Single.just(runList));
 
-        presenter.loadLatestRuns();
+        presenter.loadData();
 
-        verify(view).showLoadingLayout();
-    }
-
-    @Test
-    public void shouldHideLoadingViewWhenLoadRunsFinish(){
-        when(runsRepository.getLatestRuns()).thenReturn(Single.just(runList));
-
-        presenter.loadLatestRuns();
-
-        verify(view).hideLoadingLayout();
+        verify(view).displayLoading();
     }
 
     @Test
     public void shouldDisplayNotFountLayoutWithEmptyResult(){
         when(runsRepository.getLatestRuns()).thenReturn(Single.just(Collections.<Run>emptyList()));
 
-        presenter.loadLatestRuns();
+        presenter.loadData();
 
-        verify(view).displayNotFoundLayout();
+        verify(view).displayNotFound();
+    }
+
+    @Test
+    public void shouldHandleError(){
+        when(runsRepository.getLatestRuns()).thenReturn(Single.<List<Run>>error(new Throwable()));
+
+        presenter.loadData();
+
+        verify(view).displayError();
     }
 
 }

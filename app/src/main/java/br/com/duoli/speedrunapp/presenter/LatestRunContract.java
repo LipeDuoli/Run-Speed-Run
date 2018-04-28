@@ -6,23 +6,13 @@ import br.com.duoli.sr4j.models.runs.Run;
 
 public interface LatestRunContract {
 
-    interface View {
+    interface View extends BaseView {
 
         void displayRuns(List<Run> runList);
 
-        void showLoadingLayout();
-
-        void hideLoadingLayout();
-
-        void displayNotFoundLayout();
-
-        void hideNotFoundLayout();
-
     }
 
-    interface Presenter {
-
-        void loadLatestRuns();
+    interface Presenter extends DataPresenter {
 
         void setView(LatestRunContract.View view);
 
