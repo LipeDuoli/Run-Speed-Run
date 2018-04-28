@@ -24,6 +24,7 @@
                 android:id="@+id/game_image"
                 android:layout_width="@dimen/latest_run_cover_width"
                 android:layout_height="match_parent"
+                android:contentDescription="@string/game_cover_description"
                 android:scaleType="centerCrop"
                 app:cover="@{run.game.assets.coverMedium.uri}"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -13,5 +13,7 @@
     <string name="latest_run_time_format">%1$s <b>by</b> %2$s</string>
     <string name="loading_text">Loading Games</string>
     <string name="not_found_text">No games found</string>
+
     <string name="sad_face_description">Sad Face Emotion</string>
+    <string name="game_cover_description">Game Cover</string>
 </resources>
