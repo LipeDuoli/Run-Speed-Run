@@ -45,7 +45,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/reload_button"
-            android:onClick="@{() -> presenter.reloadData()}"
+            android:onClick="@{() -> presenter.reloadData(true)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/text"
             app:layout_constraintStart_toStartOf="@+id/text"

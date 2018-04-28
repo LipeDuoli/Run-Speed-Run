@@ -3,32 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.main.LatestRunsFragment">
 
-    <FrameLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbarStyle="insideOverlay"
-            android:scrollbars="vertical" />
+            android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/loading_layout"
-            layout="@layout/loading_layout"
-            android:visibility="gone" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbarStyle="insideOverlay"
+                android:scrollbars="vertical" />
 
-        <include
-            android:id="@+id/not_found_layout"
-            layout="@layout/not_found_layout"
-            android:visibility="gone" />
+            <include
+                android:id="@+id/loading_layout"
+                layout="@layout/loading_layout"
+                android:visibility="gone" />
 
-        <include
-            android:id="@+id/error_layout"
-            layout="@layout/error_layout"
-            android:visibility="gone" />
+            <include
+                android:id="@+id/not_found_layout"
+                layout="@layout/not_found_layout"
+                android:visibility="gone" />
 
-    </FrameLayout>
+            <include
+                android:id="@+id/error_layout"
+                layout="@layout/error_layout"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </layout>

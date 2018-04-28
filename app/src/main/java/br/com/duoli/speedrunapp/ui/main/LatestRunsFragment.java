@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +51,20 @@ public class LatestRunsFragment extends Fragment implements
                 false);
 
         configureRecyclerView();
+        configureSwipeRefresh();
         return mBinding.getRoot();
+    }
+
+    private void configureSwipeRefresh() {
+        mBinding.swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mRunPresenter.reloadData(false);
+                if (mBinding.errorLayout.getRoot().isShown()){
+                    mBinding.swipeRefresh.setRefreshing(false);
+                }
+            }
+        });
     }
 
     private void configureRecyclerView() {
@@ -65,6 +79,7 @@ public class LatestRunsFragment extends Fragment implements
     public void displayRuns(List<Run> runList) {
         mRunAdapter.setRuns(runList);
         mBinding.recyclerView.setVisibility(View.VISIBLE);
+        mBinding.swipeRefresh.setRefreshing(false);
         hideError();
         hideLoading();
         hideNotFound();

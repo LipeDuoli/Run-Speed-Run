@@ -4,5 +4,5 @@ public interface DataPresenter {
 
     void loadData();
 
-    void reloadData();
+    void reloadData(boolean displayLoading);
 }
