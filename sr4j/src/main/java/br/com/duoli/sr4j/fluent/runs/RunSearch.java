@@ -32,10 +32,9 @@ public class RunSearch implements IRunParams {
                 throw new SearchException(ErrorUtil.parseError(response).getMessage());
             }
             return response.body();
-        } catch (SearchException | IOException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new SearchException(e.getMessage());
         }
-        return new PageableList<>();
     }
 
     public IRunParamsId withId(String runId) {

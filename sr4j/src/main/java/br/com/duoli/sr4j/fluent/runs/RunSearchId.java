@@ -32,9 +32,8 @@ public class RunSearchId implements IRunParamsId {
                 throw new SearchException(ErrorUtil.parseError(response).getMessage());
             }
             return response.body().getData();
-        } catch (SearchException | IOException e) {
-            e.printStackTrace();
-            return null;
+        } catch (IOException e) {
+            throw new SearchException(e.getMessage());
         }
     }
 

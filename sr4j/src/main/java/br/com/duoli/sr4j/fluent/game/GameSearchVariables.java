@@ -1,7 +1,6 @@
 package br.com.duoli.sr4j.fluent.game;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 import br.com.duoli.sr4j.exceptions.SearchException;
@@ -29,9 +28,8 @@ class GameSearchVariables implements IGameVariables {
                 throw new SearchException(ErrorUtil.parseError(response).getMessage());
             }
             return response.body().getData();
-        } catch (SearchException | IOException e) {
-            e.printStackTrace();
-            return Collections.emptyList();
+        } catch (IOException e) {
+            throw new SearchException(e.getMessage());
         }
     }
 }

@@ -27,9 +27,8 @@ class GameSearchRecords implements IGameRecords {
                 throw new SearchException(ErrorUtil.parseError(response).getMessage());
             }
             return response.body();
-        } catch (SearchException | IOException e) {
-            e.printStackTrace();
-            return new PageableList<>();
+        } catch (IOException e) {
+            throw new SearchException(e.getMessage());
         }
     }
 }
