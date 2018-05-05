@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,9 +16,13 @@ import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.ActivityMainBinding;
 import br.com.duoli.speedrunapp.ui.main.games.GamesFragment;
 import br.com.duoli.speedrunapp.ui.main.latestruns.LatestRunsFragment;
+import io.reactivex.functions.Consumer;
+import io.reactivex.plugins.RxJavaPlugins;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private ActivityMainBinding mBinding;
     private Toolbar mToolbar;
@@ -30,9 +35,19 @@ public class MainActivity extends AppCompatActivity
 
         configureToolbar();
         configureNavigationDrawer();
+        configureRxErrorHandle();
 
         if (savedInstanceState == null)
             loadLatestRunsFragment();
+    }
+
+    private void configureRxErrorHandle() {
+        RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                Log.e(TAG,"Error on clear disposable: " + throwable.toString());
+            }
+        });
     }
 
     private void configureToolbar() {
