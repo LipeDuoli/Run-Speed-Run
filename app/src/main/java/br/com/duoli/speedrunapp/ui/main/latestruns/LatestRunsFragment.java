@@ -1,4 +1,4 @@
-package br.com.duoli.speedrunapp.ui.main;
+package br.com.duoli.speedrunapp.ui.main.latestruns;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

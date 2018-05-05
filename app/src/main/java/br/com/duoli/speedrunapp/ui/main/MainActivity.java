@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.ActivityMainBinding;
 import br.com.duoli.speedrunapp.ui.main.games.GamesFragment;
+import br.com.duoli.speedrunapp.ui.main.latestruns.LatestRunsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

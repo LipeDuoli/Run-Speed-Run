@@ -1,4 +1,4 @@
-package br.com.duoli.speedrunapp.ui.main;
+package br.com.duoli.speedrunapp.ui.main.latestruns;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
