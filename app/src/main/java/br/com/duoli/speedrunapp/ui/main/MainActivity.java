@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.ActivityMainBinding;
+import br.com.duoli.speedrunapp.ui.main.games.GamesFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,13 +32,6 @@ public class MainActivity extends AppCompatActivity
 
         if (savedInstanceState == null)
             loadLatestRunsFragment();
-    }
-
-    private void loadLatestRunsFragment() {
-        LatestRunsFragment runsFragment = LatestRunsFragment.newInstance();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.contentFrame, runsFragment)
-                .commit();
     }
 
     private void configureToolbar() {
@@ -76,10 +70,10 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_latest:
-                //TODO load latest runs fragment
+                loadLatestRunsFragment();
                 break;
             case R.id.nav_games:
-                //TODO load games fragment
+                loadGamesFragment();
                 break;
             case R.id.nav_favorites:
                 //TODO load favorites activity
@@ -88,5 +82,19 @@ public class MainActivity extends AppCompatActivity
 
         mDrawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void loadLatestRunsFragment() {
+        LatestRunsFragment runsFragment = LatestRunsFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentFrame, runsFragment)
+                .commit();
+    }
+
+    private void loadGamesFragment() {
+        GamesFragment gamesFragment = GamesFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentFrame, gamesFragment)
+                .commit();
     }
 }

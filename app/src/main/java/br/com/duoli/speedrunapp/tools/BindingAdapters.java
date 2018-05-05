@@ -5,7 +5,7 @@ import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.squareup.picasso.Picasso;
 
 import br.com.duoli.speedrunapp.R;
 
@@ -22,8 +22,7 @@ public class BindingAdapters {
 
     @BindingAdapter({"cover"})
     public static void setGameCover(ImageView view, String url){
-        Context context = view.getContext();
-        Glide.with(context)
+        Picasso.get()
                 .load(url)
                 .into(view);
     }
