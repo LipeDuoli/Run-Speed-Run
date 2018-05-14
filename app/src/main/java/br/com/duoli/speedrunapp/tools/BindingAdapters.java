@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Date;
+
 import br.com.duoli.speedrunapp.R;
 
 public class BindingAdapters {
@@ -25,5 +27,13 @@ public class BindingAdapters {
         Picasso.get()
                 .load(url)
                 .into(view);
+    }
+
+    @BindingAdapter({"gameYear"})
+    public static void setGameYear(TextView view, Date date){
+        if (date != null) {
+            String year = DateUtils.getYear(date);
+            view.setText(year);
+        }
     }
 }
