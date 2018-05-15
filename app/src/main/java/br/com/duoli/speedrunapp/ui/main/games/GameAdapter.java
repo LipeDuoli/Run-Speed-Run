@@ -57,6 +57,7 @@ class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
         ViewHolder(GamesItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            this.binding.getRoot().setOnClickListener(this);
         }
 
         void bind(Game game) {

@@ -57,6 +57,7 @@ class LatestRunAdapter extends RecyclerView.Adapter<LatestRunAdapter.ViewHolder>
         ViewHolder(LatestRunItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            binding.getRoot().setOnClickListener(this);
         }
 
         void bind(Run run) {

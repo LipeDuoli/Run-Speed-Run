@@ -1,5 +1,6 @@
 package br.com.duoli.speedrunapp.ui.main.games;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,6 +21,7 @@ import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.FragmentMainBinding;
 import br.com.duoli.speedrunapp.presenter.GamesContract;
 import br.com.duoli.speedrunapp.tools.EndlessRecyclerViewScrollListener;
+import br.com.duoli.speedrunapp.ui.detail.DetailActivity;
 import br.com.duoli.sr4j.models.games.Game;
 
 public class GamesFragment extends Fragment implements
@@ -145,7 +147,10 @@ public class GamesFragment extends Fragment implements
 
     @Override
     public void onClickGame(Game game) {
-        //TODO go to game detail
+        Intent detailIntent = DetailActivity.newInstance(getContext(),
+                game.getId());
+
+        startActivity(detailIntent);
     }
 
     @NonNull

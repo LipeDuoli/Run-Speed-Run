@@ -1,5 +1,6 @@
 package br.com.duoli.speedrunapp.ui.main.latestruns;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import java.util.List;
 import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.FragmentMainBinding;
 import br.com.duoli.speedrunapp.presenter.LatestRunContract;
+import br.com.duoli.speedrunapp.ui.detail.DetailActivity;
 import br.com.duoli.sr4j.models.runs.Run;
 
 public class LatestRunsFragment extends Fragment implements
@@ -132,7 +134,10 @@ public class LatestRunsFragment extends Fragment implements
 
     @Override
     public void onClickLatestRun(Run run) {
-        //TODO go to run detail
+        Intent detailIntent = DetailActivity.newInstance(getContext(),
+                run.getGame().getId());
+
+        startActivity(detailIntent);
     }
 
     @NonNull
