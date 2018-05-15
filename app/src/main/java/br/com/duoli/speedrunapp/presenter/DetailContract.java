@@ -1,18 +1,18 @@
 package br.com.duoli.speedrunapp.presenter;
 
-import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
+import br.com.duoli.sr4j.models.games.Game;
 
 public interface DetailContract {
 
     interface View extends BaseView {
 
-        void displayLeaderboard(Leaderboard leaderboard);
+        void displayGameInfo(Game game);
 
     }
 
     interface Presenter {
 
-        void loadData(String gameId, String categoryId);
+        void loadData(String gameId);
 
         void setView(DetailContract.View view);
 

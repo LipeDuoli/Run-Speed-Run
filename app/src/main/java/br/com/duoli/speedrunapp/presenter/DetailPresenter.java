@@ -2,8 +2,8 @@ package br.com.duoli.speedrunapp.presenter;
 
 import android.util.Log;
 
-import br.com.duoli.speedrunapp.repository.LeaderboardRepository;
-import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
+import br.com.duoli.speedrunapp.repository.GamesRepository;
+import br.com.duoli.sr4j.models.games.Game;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableSingleObserver;
@@ -13,14 +13,14 @@ public class DetailPresenter implements DetailContract.Presenter {
 
     private final String TAG = DetailPresenter.class.getSimpleName();
 
-    private LeaderboardRepository mLeaderboardRepository;
+    private GamesRepository mGameRepository;
     private Scheduler mScheduler;
     private CompositeDisposable mDisposable = new CompositeDisposable();
     private DetailContract.View mView;
-    private Leaderboard mLeaderboard;
+    private Game mGame;
 
-    public DetailPresenter(LeaderboardRepository leaderboardRepository, Scheduler scheduler) {
-        this.mLeaderboardRepository = leaderboardRepository;
+    public DetailPresenter(GamesRepository gameRepository, Scheduler scheduler) {
+        this.mGameRepository = gameRepository;
         this.mScheduler = scheduler;
     }
 
@@ -30,12 +30,12 @@ public class DetailPresenter implements DetailContract.Presenter {
     }
 
     @Override
-    public void loadData(String gameId, String categoryId) {
+    public void loadData(String gameId) {
         mView.displayLoading();
-        if (mLeaderboard != null) {
-            mView.displayLeaderboard(mLeaderboard);
+        if (mGame != null) {
+            mView.displayGameInfo(mGame);
         } else {
-            loadLeaderboard(gameId, categoryId);
+            loadGame(gameId);
         }
     }
 
@@ -44,17 +44,17 @@ public class DetailPresenter implements DetailContract.Presenter {
         mDisposable.clear();
     }
 
-    private void loadLeaderboard(String gameId, String categoryId) {
-        mDisposable.add(mLeaderboardRepository.getLeaderboard(gameId, categoryId)
+    private void loadGame(String gameId) {
+        mDisposable.add(mGameRepository.getGame(gameId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(mScheduler)
-                .subscribeWith(new DisposableSingleObserver<Leaderboard>() {
+                .subscribeWith(new DisposableSingleObserver<Game>() {
                     @Override
-                    public void onSuccess(Leaderboard leaderboard) {
-                        mLeaderboard = leaderboard;
+                    public void onSuccess(Game game) {
+                        mGame = game;
 
-                        if (mLeaderboard != null) {
-                            mView.displayLeaderboard(mLeaderboard);
+                        if (mGame != null) {
+                            mView.displayGameInfo(mGame);
                         } else {
                             mView.displayNotFound();
                         }
@@ -63,7 +63,7 @@ public class DetailPresenter implements DetailContract.Presenter {
                     @Override
                     public void onError(Throwable e) {
                         mView.displayError();
-                        Log.e(TAG, "loadLeaderboard: " + e.getMessage());
+                        Log.e(TAG, "loadGame: " + e.getMessage());
                     }
                 }));
     }

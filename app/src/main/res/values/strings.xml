@@ -18,5 +18,7 @@
     <string name="game_cover_description">Game Cover</string>
     <string name="error_load_games_text">Error on load Games</string>
     <string name="reload_button">Reload</string>
+    <string name="game_not_found">Game not found</string>
+    <string name="empty_title">\u0020</string>
 
 </resources>

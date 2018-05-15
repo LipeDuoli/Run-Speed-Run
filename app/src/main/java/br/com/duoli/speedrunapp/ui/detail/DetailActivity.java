@@ -9,11 +9,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Toast;
 
 import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.ActivityDetailBinding;
 import br.com.duoli.speedrunapp.presenter.DetailContract;
-import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
+import br.com.duoli.sr4j.models.games.Game;
 
 public class DetailActivity extends AppCompatActivity implements
         DetailContract.View,
@@ -22,11 +24,9 @@ public class DetailActivity extends AppCompatActivity implements
     private static final String TAG = DetailActivity.class.getSimpleName();
     private static final int LOADER_ID = 5000;
     public static final String GAME_ID = "gameId";
-    public static final String CATEGORY_ID = "categoryId";
 
     private ActivityDetailBinding mBinding;
     private String mGameId = "";
-    private String mCategoryId = "";
     private DetailContract.Presenter mDetailPresenter;
 
     @Override
@@ -40,6 +40,12 @@ public class DetailActivity extends AppCompatActivity implements
 
     }
 
+    @Override
+    protected void onDestroy() {
+        mDetailPresenter.destroy();
+        super.onDestroy();
+    }
+
     private void configureToolBar() {
         setSupportActionBar(mBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -49,51 +55,54 @@ public class DetailActivity extends AppCompatActivity implements
         if (getIntent().hasExtra(GAME_ID)) {
             mGameId = getIntent().getStringExtra(GAME_ID);
         }
-        if (getIntent().hasExtra(CATEGORY_ID)) {
-            mCategoryId = getIntent().getStringExtra(CATEGORY_ID);
-        }
     }
 
     @Override
-    public void displayLeaderboard(Leaderboard leaderboard) {
-        mBinding.setLeaderboard(leaderboard);
+    public void displayGameInfo(Game game) {
+        mBinding.setGame(game);
+        mBinding.gameInfoFrame.setVisibility(View.VISIBLE);
+        hideLoading();
+        hideError();
     }
 
     @Override
     public void displayLoading() {
-
+        mBinding.loadingLayout.setVisibility(View.VISIBLE);
+        mBinding.gameInfoFrame.setVisibility(View.GONE);
+        mBinding.errorLayout.getRoot().setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-
+        mBinding.loadingLayout.setVisibility(View.GONE);
     }
 
     @Override
     public void displayNotFound() {
-
+        Toast.makeText(this, getString(R.string.game_not_found), Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
     public void hideNotFound() {
-
+        //not used on this screen
     }
 
     @Override
     public void displayError() {
-
+        mBinding.loadingLayout.setVisibility(View.GONE);
+        mBinding.gameInfoFrame.setVisibility(View.GONE);
+        mBinding.errorLayout.getRoot().setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideError() {
-
-
+        mBinding.errorLayout.getRoot().setVisibility(View.GONE);
     }
 
-    public static Intent newInstance(Context context, String gameId, String categoryId) {
+    public static Intent newInstance(Context context, String gameId) {
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(GAME_ID, gameId);
-        intent.putExtra(CATEGORY_ID, categoryId);
         return intent;
     }
 
@@ -107,7 +116,7 @@ public class DetailActivity extends AppCompatActivity implements
     public void onLoadFinished(@NonNull Loader<DetailContract.Presenter> loader, DetailContract.Presenter data) {
         this.mDetailPresenter = data;
         mDetailPresenter.setView(this);
-        mDetailPresenter.loadData(mGameId, mCategoryId);
+        mDetailPresenter.loadData(mGameId);
     }
 
     @Override

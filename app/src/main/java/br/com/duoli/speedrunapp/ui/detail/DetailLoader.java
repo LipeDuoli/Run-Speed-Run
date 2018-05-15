@@ -8,7 +8,7 @@ import android.support.v4.content.Loader;
 
 import br.com.duoli.speedrunapp.presenter.DetailContract;
 import br.com.duoli.speedrunapp.presenter.DetailPresenter;
-import br.com.duoli.speedrunapp.repository.LeaderboardRepositoryImpl;
+import br.com.duoli.speedrunapp.repository.GamesRepositoryImpl;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class DetailLoader extends Loader<DetailContract.Presenter> {
@@ -30,7 +30,7 @@ public class DetailLoader extends Loader<DetailContract.Presenter> {
 
     @Override
     protected void onForceLoad() {
-        deliverResult(new DetailPresenter(new LeaderboardRepositoryImpl(), AndroidSchedulers.mainThread()));
+        deliverResult(new DetailPresenter(new GamesRepositoryImpl(), AndroidSchedulers.mainThread()));
     }
 
     @Override

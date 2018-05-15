@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="leaderboard"
-            type="br.com.duoli.sr4j.models.leaderboards.Leaderboard" />
+            name="game"
+            type="br.com.duoli.sr4j.models.games.Game" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -33,16 +33,18 @@
                 app:expandedTitleMarginStart="48dp"
                 app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:title="@{leaderboard.game.names.international}"
+                app:title="@{game.names.international ?? @string/empty_title}"
                 app:toolbarId="@+id/toolbar">
 
                 <android.support.constraint.ConstraintLayout
+                    android:id="@+id/game_info_frame"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
 
                     <ImageView
                         android:id="@+id/game_cover"
-                        cover="@{leaderboard.game.assets.coverLarge.uri}"
+                        cover="@{game.assets.coverLarge.uri}"
                         android:layout_width="87dp"
                         android:layout_height="118dp"
                         android:layout_marginBottom="32dp"
@@ -57,7 +59,7 @@
                     <TextView
                         android:id="@+id/game_year"
                         style="@style/TextAppearance.AppCompat.Subhead"
-                        gameYear="@{leaderboard.game.releaseDate}"
+                        gameYear="@{game.releaseDate}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
@@ -72,12 +74,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="@{leaderboard.platforms.get(0).name}"
+                        android:text="@{game.platforms.get(0).name}"
                         app:layout_constraintStart_toEndOf="@+id/game_cover"
                         app:layout_constraintTop_toBottomOf="@+id/game_year"
                         tools:text="Plataforma" />
 
                 </android.support.constraint.ConstraintLayout>
+
+                <include
+                    android:id="@+id/loading_layout"
+                    layout="@layout/loading_layout"
+                    style="@style/AppTheme.IncludeLayout"
+                    android:visibility="gone" />
+
+                <include
+                    android:id="@+id/error_layout"
+                    layout="@layout/error_layout"
+                    style="@style/AppTheme.IncludeLayout"
+                    android:visibility="gone" />
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/toolbar"

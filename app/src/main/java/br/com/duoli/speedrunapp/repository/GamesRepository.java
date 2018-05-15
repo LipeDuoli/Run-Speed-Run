@@ -7,4 +7,6 @@ import io.reactivex.Single;
 public interface GamesRepository {
 
     Single<PageableList<Game>> getGames(int pageOffset);
+
+    Single<Game> getGame(String gameId);
 }
