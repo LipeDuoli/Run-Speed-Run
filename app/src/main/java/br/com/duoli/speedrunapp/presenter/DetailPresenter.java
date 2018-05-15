@@ -18,6 +18,7 @@ public class DetailPresenter implements DetailContract.Presenter {
     private CompositeDisposable mDisposable = new CompositeDisposable();
     private DetailContract.View mView;
     private Game mGame;
+    private String mGameId;
 
     public DetailPresenter(GamesRepository gameRepository, Scheduler scheduler) {
         this.mGameRepository = gameRepository;
@@ -31,12 +32,21 @@ public class DetailPresenter implements DetailContract.Presenter {
 
     @Override
     public void loadData(String gameId) {
+        mGameId = gameId;
         mView.displayLoading();
         if (mGame != null) {
             mView.displayGameInfo(mGame);
         } else {
-            loadGame(gameId);
+            loadGame(mGameId);
         }
+    }
+
+    @Override
+    public void reloadData(boolean displayLoading) {
+        if (displayLoading){
+            mView.displayLoading();
+        }
+        loadGame(mGameId);
     }
 
     @Override
@@ -67,4 +77,5 @@ public class DetailPresenter implements DetailContract.Presenter {
                     }
                 }));
     }
+
 }

@@ -117,6 +117,7 @@ public class DetailActivity extends AppCompatActivity implements
         this.mDetailPresenter = data;
         mDetailPresenter.setView(this);
         mDetailPresenter.loadData(mGameId);
+        mBinding.errorLayout.setPresenter(mDetailPresenter);
     }
 
     @Override

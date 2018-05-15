@@ -1,8 +1,6 @@
 package br.com.duoli.speedrunapp.presenter;
 
-public interface DataPresenter {
-
-    void loadData();
+public interface ReloadPresenter {
 
     void reloadData(boolean displayLoading);
 }

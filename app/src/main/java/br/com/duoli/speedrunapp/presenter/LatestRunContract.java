@@ -12,7 +12,9 @@ public interface LatestRunContract {
 
     }
 
-    interface Presenter extends DataPresenter {
+    interface Presenter extends ReloadPresenter {
+
+        void loadData();
 
         void setView(LatestRunContract.View view);
 

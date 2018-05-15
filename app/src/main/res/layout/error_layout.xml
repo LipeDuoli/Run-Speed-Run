@@ -5,7 +5,7 @@
     <data>
         <variable
             name="presenter"
-            type="br.com.duoli.speedrunapp.presenter.DataPresenter" />
+            type="br.com.duoli.speedrunapp.presenter.ReloadPresenter" />
     </data>
 
     <android.support.constraint.ConstraintLayout

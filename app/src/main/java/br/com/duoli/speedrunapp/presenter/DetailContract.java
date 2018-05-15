@@ -10,7 +10,7 @@ public interface DetailContract {
 
     }
 
-    interface Presenter {
+    interface Presenter extends ReloadPresenter {
 
         void loadData(String gameId);
 

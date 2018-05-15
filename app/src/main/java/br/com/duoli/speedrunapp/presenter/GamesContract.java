@@ -12,7 +12,9 @@ public interface GamesContract {
 
     }
 
-    interface Presenter extends DataPresenter {
+    interface Presenter extends ReloadPresenter {
+
+        void loadData();
 
         void setView(GamesContract.View view);
 
