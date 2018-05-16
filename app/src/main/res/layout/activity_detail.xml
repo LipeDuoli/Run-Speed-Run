@@ -83,14 +83,14 @@
 
                 <include
                     android:id="@+id/loading_layout"
-                    layout="@layout/loading_layout"
                     style="@style/AppTheme.IncludeLayout"
+                    layout="@layout/loading_layout"
                     android:visibility="gone" />
 
                 <include
                     android:id="@+id/error_layout"
-                    layout="@layout/error_layout"
                     style="@style/AppTheme.IncludeLayout"
+                    layout="@layout/error_layout"
                     android:visibility="gone" />
 
                 <android.support.v7.widget.Toolbar
@@ -102,6 +102,13 @@
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
+            <android.support.design.widget.TabLayout
+                android:id="@+id/leaderboard_tab"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:tabGravity="fill"
+                app:tabMode="scrollable" />
+
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.widget.NestedScrollView
@@ -109,11 +116,10 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/text_margin"
-                tools:text="Game leaderboards" />
+            <android.support.v4.view.ViewPager
+                android:id="@+id/leaderboard_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </android.support.v4.widget.NestedScrollView>
 

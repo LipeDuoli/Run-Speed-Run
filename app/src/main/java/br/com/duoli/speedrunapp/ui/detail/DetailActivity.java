@@ -12,9 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.List;
+
 import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.ActivityDetailBinding;
 import br.com.duoli.speedrunapp.presenter.DetailContract;
+import br.com.duoli.sr4j.models.categories.Category;
 import br.com.duoli.sr4j.models.games.Game;
 
 public class DetailActivity extends AppCompatActivity implements
@@ -28,6 +31,7 @@ public class DetailActivity extends AppCompatActivity implements
     private ActivityDetailBinding mBinding;
     private String mGameId = "";
     private DetailContract.Presenter mDetailPresenter;
+    private LeaderboardFragmentPagerAdapter mLeaderboardPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +40,17 @@ public class DetailActivity extends AppCompatActivity implements
 
         configureToolBar();
         parseIntentExtras();
+        initViewPager();
         getSupportLoaderManager().initLoader(LOADER_ID, null, this);
 
+    }
+
+    private void initViewPager() {
+        mLeaderboardPagerAdapter = new LeaderboardFragmentPagerAdapter(getSupportFragmentManager());
+        mBinding.leaderboardViewpager
+                .setAdapter(mLeaderboardPagerAdapter);
+
+        mBinding.leaderboardTab.setupWithViewPager(mBinding.leaderboardViewpager);
     }
 
     @Override
@@ -63,6 +76,16 @@ public class DetailActivity extends AppCompatActivity implements
         mBinding.gameInfoFrame.setVisibility(View.VISIBLE);
         hideLoading();
         hideError();
+        configureLeaderboardsTabsFor(game.getCategories());
+    }
+
+    private void configureLeaderboardsTabsFor(List<Category> categories) {
+        for(Category category : categories){
+            mLeaderboardPagerAdapter.addFragment(
+                    LeaderboardFragment.newInstance(mGameId, category.getId()),
+                    category.getName());
+        }
+        mLeaderboardPagerAdapter.notifyDataSetChanged();
     }
 
     @Override
