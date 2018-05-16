@@ -26,7 +26,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/game_cover_description"
                 android:scaleType="centerCrop"
-                app:cover="@{run.game.assets.coverMedium.uri}"
+                cover="@{run.game.assets.coverLarge.uri}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
