@@ -23,7 +23,7 @@
                 android:layout_height="@dimen/leaderboard_icon_size"
                 android:layout_marginEnd="4dp"
                 android:contentDescription="@string/place_description"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
                 tools:background="@color/colorAccent" />
 
             <TextView
