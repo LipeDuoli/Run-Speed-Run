@@ -86,13 +86,16 @@ public class LeaderboardFragment extends Fragment implements
         mLeaderboardAdapter.setLeaderboard(leaderboard);
         mBinding.recyclerView.setVisibility(View.VISIBLE);
         hideLoading();
+        hideError();
+        hideNotFound();
     }
 
     @Override
     public void displayLoading() {
         mBinding.recyclerView.setVisibility(View.INVISIBLE);
         mBinding.loadingLayout.setVisibility(View.VISIBLE);
-
+        hideNotFound();
+        hideError();
     }
 
     @Override
@@ -102,22 +105,26 @@ public class LeaderboardFragment extends Fragment implements
 
     @Override
     public void displayNotFound() {
-
+        mBinding.recyclerView.setVisibility(View.INVISIBLE);
+        mBinding.notFoundLayout.setVisibility(View.VISIBLE);
+        hideLoading();
     }
 
     @Override
     public void hideNotFound() {
-
+        mBinding.notFoundLayout.setVisibility(View.GONE);
     }
 
     @Override
     public void displayError() {
-
+        mBinding.recyclerView.setVisibility(View.INVISIBLE);
+        mBinding.errorLayout.getRoot().setVisibility(View.VISIBLE);
+        hideLoading();
     }
 
     @Override
     public void hideError() {
-
+        mBinding.errorLayout.getRoot().setVisibility(View.GONE);
     }
 
     @NonNull
@@ -131,10 +138,11 @@ public class LeaderboardFragment extends Fragment implements
         this.mLeaderboardPresenter = data;
         mLeaderboardPresenter.setView(this);
         mLeaderboardPresenter.loadData(mGameId, mCategoryId);
+        mBinding.errorLayout.setPresenter(mLeaderboardPresenter);
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<LeaderboardContract.Presenter> loader) {
-
+        //do nothing
     }
 }

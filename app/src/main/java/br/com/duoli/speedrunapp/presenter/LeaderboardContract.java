@@ -10,7 +10,7 @@ public interface LeaderboardContract {
 
     }
 
-    interface Presenter {
+    interface Presenter extends ReloadPresenter {
 
         void loadData(String gameId, String categoryId);
 

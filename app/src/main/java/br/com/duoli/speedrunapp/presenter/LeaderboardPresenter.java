@@ -3,7 +3,6 @@ package br.com.duoli.speedrunapp.presenter;
 import android.util.Log;
 
 import br.com.duoli.speedrunapp.repository.LeaderboardRepository;
-import br.com.duoli.sr4j.models.games.Game;
 import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
 import io.reactivex.Scheduler;
 import io.reactivex.disposables.CompositeDisposable;
@@ -19,6 +18,8 @@ public class LeaderboardPresenter implements LeaderboardContract.Presenter {
     private CompositeDisposable mDisposable = new CompositeDisposable();
     private LeaderboardContract.View mView;
     private Leaderboard mLeaderboard;
+    private String mGameId = "";
+    private String mCategoryId = "";
 
     public LeaderboardPresenter(LeaderboardRepository leaderboardRepository, Scheduler scheduler) {
         this.mLeaderboardRepository = leaderboardRepository;
@@ -32,6 +33,9 @@ public class LeaderboardPresenter implements LeaderboardContract.Presenter {
 
     @Override
     public void loadData(String gameId, String categoryId) {
+        mGameId = gameId;
+        mCategoryId = categoryId;
+
         mView.displayLoading();
         if (mLeaderboard != null) {
             mView.displayLeaderboard(mLeaderboard);
@@ -69,4 +73,11 @@ public class LeaderboardPresenter implements LeaderboardContract.Presenter {
                 }));
     }
 
+    @Override
+    public void reloadData(boolean displayLoading) {
+        if (displayLoading) {
+            mView.displayLoading();
+        }
+        loadLeaderboard(mGameId, mCategoryId);
+    }
 }

@@ -43,6 +43,7 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,9 +52,27 @@
 
         <include
             android:id="@+id/loading_layout"
+            style="@style/AppTheme.IncludeLayout"
             layout="@layout/loading_layout"
             android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_header" />
+
+        <include
+            android:id="@+id/error_layout"
+            style="@style/AppTheme.IncludeLayout"
+            layout="@layout/error_layout"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_header" />
+
+        <include
+            android:id="@+id/not_found_layout"
+            style="@style/AppTheme.IncludeLayout"
+            layout="@layout/not_found_layout"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recycler_view_header" />
