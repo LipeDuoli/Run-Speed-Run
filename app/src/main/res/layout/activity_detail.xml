@@ -50,6 +50,7 @@
                         android:layout_marginBottom="32dp"
                         android:layout_marginStart="40dp"
                         android:layout_marginTop="56dp"
+                        android:contentDescription="@string/game_cover_description"
                         android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -104,10 +105,7 @@
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/leaderboard_tab"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:tabGravity="fill"
-                app:tabMode="scrollable" />
+                style="@style/AppTheme.LeaderboardTabLayout" />
 
         </android.support.design.widget.AppBarLayout>
 
@@ -115,7 +113,7 @@
             android:id="@+id/leaderboard_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </android.support.design.widget.CoordinatorLayout>
 

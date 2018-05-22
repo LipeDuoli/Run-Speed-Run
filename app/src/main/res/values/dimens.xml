@@ -12,6 +12,9 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="include_margin">16dp</dimen>
 
+    <dimen name="leaderboard_tab_min_width">90dp</dimen>
+    <dimen name="leaderboard_tab_offset_start">52dp</dimen>
+    <dimen name="leaderboard_tab_padding">16dp</dimen>
     <dimen name="leaderboard_card_height">56dp</dimen>
     <dimen name="leaderboard_icon_size">24dp</dimen>
     <dimen name="leaderboard_card_horizontal_margin">16dp</dimen>

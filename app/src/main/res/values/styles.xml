@@ -17,25 +17,48 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="AppTheme.IncludeLayout" >
+    <style name="AppTheme.IncludeLayout">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_margin">@dimen/include_margin</item>
     </style>
 
-    <style name="AppTheme.LeaderboardTextStyle" >
+    <style name="AppTheme.LeaderboardTextStyle">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
 
-    <style name="AppTheme.LeaderboardHeaderStyle" parent="TextAppearance.AppCompat.Medium" >
+    <style name="AppTheme.LeaderboardHeaderStyle" parent="TextAppearance.AppCompat.Medium">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.LeaderboardTabLayout" parent="Widget.Design.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="tabIndicatorColor">@color/colorAccent</item>
+        <item name="android:minWidth">@dimen/leaderboard_tab_min_width</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="android:paddingStart">@dimen/leaderboard_tab_offset_start</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="tabPaddingStart">@dimen/leaderboard_tab_padding</item>
+        <item name="tabPaddingEnd">@dimen/leaderboard_tab_padding</item>
+        <item name="tabBackground">?attr/selectableItemBackground</item>
+        <item name="tabTextAppearance">@style/AppTheme.LeaderboardTabTextAppearance</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">scrollable</item>
+    </style>
+
+    <style name="AppTheme.LeaderboardTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="textAllCaps">true</item>
     </style>
 
 </resources>
