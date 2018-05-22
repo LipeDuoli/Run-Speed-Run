@@ -22,5 +22,9 @@
     <string name="empty_title">\u0020</string>
 
     <string name="place_description">Place Icon</string>
+    <string name="header_rank">Rank</string>
+    <string name="header_player">Player</string>
+    <string name="header_time">Time</string>
+    <string name="video_description">Video Icon</string>
 
 </resources>

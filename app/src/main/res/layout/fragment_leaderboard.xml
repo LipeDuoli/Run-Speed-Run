@@ -7,48 +7,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_rank"
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="Rank"
-            android:textColor="@color/colorAccent"
-            app:layout_constraintBottom_toTopOf="@+id/recycler_view"
-            app:layout_constraintEnd_toStartOf="@+id/guideline"
+        <LinearLayout
+            android:id="@+id/recycler_view_header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/leaderboard_header_height"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_player"
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:text="Player"
-            android:textColor="@color/colorAccent"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_rank"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@+id/guideline" />
+            <TextView
+                android:id="@+id/tv_rank"
+                style="@style/AppTheme.LeaderboardHeaderStyle"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="0"
+                android:text="@string/header_rank" />
 
-        <TextView
-            android:id="@+id/tv_time"
-            style="@style/TextAppearance.AppCompat.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:text="Time"
-            android:textColor="@color/colorAccent"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_player"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintStart_toStartOf="@+id/guideline2" />
+            <TextView
+                android:id="@+id/tv_player"
+                style="@style/AppTheme.LeaderboardHeaderStyle"
+                android:layout_marginStart="24dp"
+                android:text="@string/header_player" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/AppTheme.LeaderboardHeaderStyle"
+                android:layout_marginStart="16dp"
+                android:text="@string/header_time" />
+
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -57,34 +46,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_player"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_header"
             tools:listitem="@layout/leaderboard_item" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.17" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.58" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.9" />
 
         <include
             android:id="@+id/loading_layout"
             layout="@layout/loading_layout"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view_header" />
 
     </android.support.constraint.ConstraintLayout>
 
