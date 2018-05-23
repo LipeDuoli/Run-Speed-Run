@@ -16,6 +16,7 @@ import br.com.duoli.speedrunapp.tools.StringUtils;
 import br.com.duoli.sr4j.models.games.GameAssets;
 import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
 import br.com.duoli.sr4j.models.leaderboards.LeaderboardPlace;
+import br.com.duoli.sr4j.models.runs.Run;
 import br.com.duoli.sr4j.models.users.User;
 
 class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.ViewHolder> {
@@ -116,8 +117,8 @@ class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.ViewHol
 
         @Override
         public void onClick(View v) {
-//            Run run = mLeaderboard.getRuns().get(getAdapterPosition()).getRun();
-//            mClickListener.onClickLeaderboard(run.getVideo().getLinks().get(0).getUri());
+            Run run = mLeaderboard.getRuns().get(getAdapterPosition()).getRun();
+            mClickListener.onClickLeaderboard(run.getVideos().getLinks().get(0).getUri());
         }
     }
 }
