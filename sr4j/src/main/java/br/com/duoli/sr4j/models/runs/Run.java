@@ -26,7 +26,7 @@ public class Run {
     private Level level;
     @JsonAdapter(JsonEmbedDataAdapter.class)
     private Category category;
-    private RunVideo video;
+    private RunVideo videos;
     private String comment;
     private RunStatus status;
     @JsonAdapter(JsonEmbedDataUserAdapter.class)
@@ -63,8 +63,8 @@ public class Run {
         return category;
     }
 
-    public RunVideo getVideo() {
-        return video;
+    public RunVideo getVideos() {
+        return videos;
     }
 
     public String getComment() {
