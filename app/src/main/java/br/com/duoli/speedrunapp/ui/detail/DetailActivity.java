@@ -90,14 +90,14 @@ public class DetailActivity extends AppCompatActivity implements
 
     @Override
     public void displayLoading() {
-        mBinding.loadingLayout.setVisibility(View.VISIBLE);
+        mBinding.loadingLayout.getRoot().setVisibility(View.VISIBLE);
         mBinding.gameInfoFrame.setVisibility(View.GONE);
-        mBinding.errorLayout.getRoot().setVisibility(View.GONE);
+        hideError();
     }
 
     @Override
     public void hideLoading() {
-        mBinding.loadingLayout.setVisibility(View.GONE);
+        mBinding.loadingLayout.getRoot().setVisibility(View.GONE);
     }
 
     @Override
@@ -113,9 +113,9 @@ public class DetailActivity extends AppCompatActivity implements
 
     @Override
     public void displayError() {
-        mBinding.loadingLayout.setVisibility(View.GONE);
-        mBinding.gameInfoFrame.setVisibility(View.GONE);
         mBinding.errorLayout.getRoot().setVisibility(View.VISIBLE);
+        mBinding.gameInfoFrame.setVisibility(View.GONE);
+        hideLoading();
     }
 
     @Override

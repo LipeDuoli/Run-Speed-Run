@@ -102,7 +102,7 @@ public class GamesFragment extends Fragment implements
 
     @Override
     public void displayLoading() {
-        mBinding.loadingLayout.setVisibility(View.VISIBLE);
+        mBinding.loadingLayout.getRoot().setVisibility(View.VISIBLE);
         mBinding.recyclerView.setVisibility(View.GONE);
         hideNotFound();
         hideError();
@@ -110,12 +110,12 @@ public class GamesFragment extends Fragment implements
 
     @Override
     public void hideLoading() {
-        mBinding.loadingLayout.setVisibility(View.GONE);
+        mBinding.loadingLayout.getRoot().setVisibility(View.GONE);
     }
 
     @Override
     public void displayNotFound() {
-        mBinding.notFoundLayout.setVisibility(View.VISIBLE);
+        mBinding.notFoundLayout.getRoot().setVisibility(View.VISIBLE);
         mBinding.recyclerView.setVisibility(View.GONE);
         hideError();
         hideLoading();
@@ -123,7 +123,7 @@ public class GamesFragment extends Fragment implements
 
     @Override
     public void hideNotFound() {
-        mBinding.notFoundLayout.setVisibility(View.GONE);
+        mBinding.notFoundLayout.getRoot().setVisibility(View.GONE);
     }
 
     @Override

@@ -54,7 +54,14 @@ public class LatestRunsFragment extends Fragment implements
 
         configureRecyclerView();
         configureSwipeRefresh();
+        configureErrorMessages();
         return mBinding.getRoot();
+    }
+
+    private void configureErrorMessages() {
+        mBinding.errorLayout.setErrorText(getString(R.string.error_load_latest_runs_text));
+        mBinding.notFoundLayout.setNotFoundText(getString(R.string.not_found_latest_runs_text));
+        mBinding.loadingLayout.setLoadingText(getString(R.string.loading_latest_runs_text));
     }
 
     private void configureSwipeRefresh() {
@@ -89,7 +96,7 @@ public class LatestRunsFragment extends Fragment implements
 
     @Override
     public void displayLoading() {
-        mBinding.loadingLayout.setVisibility(View.VISIBLE);
+        mBinding.loadingLayout.getRoot().setVisibility(View.VISIBLE);
         mBinding.recyclerView.setVisibility(View.GONE);
         hideNotFound();
         hideError();
@@ -97,12 +104,12 @@ public class LatestRunsFragment extends Fragment implements
 
     @Override
     public void hideLoading() {
-        mBinding.loadingLayout.setVisibility(View.GONE);
+        mBinding.loadingLayout.getRoot().setVisibility(View.GONE);
     }
 
     @Override
     public void displayNotFound() {
-        mBinding.notFoundLayout.setVisibility(View.VISIBLE);
+        mBinding.notFoundLayout.getRoot().setVisibility(View.VISIBLE);
         mBinding.recyclerView.setVisibility(View.GONE);
         hideError();
         hideLoading();
@@ -110,7 +117,7 @@ public class LatestRunsFragment extends Fragment implements
 
     @Override
     public void hideNotFound() {
-        mBinding.notFoundLayout.setVisibility(View.GONE);
+        mBinding.notFoundLayout.getRoot().setVisibility(View.GONE);
     }
 
     @Override

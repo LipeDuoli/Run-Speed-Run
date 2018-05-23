@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="presenter"
             type="br.com.duoli.speedrunapp.presenter.ReloadPresenter" />
+
+        <variable
+            name="errorText"
+            type="String" />
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -30,11 +36,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/error_load_games_text"
+            android:text="@{errorText ?? @string/error_load_games_text}"
             app:layout_constraintBottom_toTopOf="@+id/reload_button"
             app:layout_constraintEnd_toEndOf="@+id/icon_image"
             app:layout_constraintStart_toStartOf="@+id/icon_image"
-            app:layout_constraintTop_toBottomOf="@+id/icon_image" />
+            app:layout_constraintTop_toBottomOf="@+id/icon_image"
+            tools:text="@string/error_load_games_text" />
 
         <Button
             android:id="@+id/reload_button"
@@ -44,8 +51,8 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@string/reload_button"
             android:onClick="@{() -> presenter.reloadData(true)}"
+            android:text="@string/reload_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/text"
             app:layout_constraintStart_toStartOf="@+id/text"

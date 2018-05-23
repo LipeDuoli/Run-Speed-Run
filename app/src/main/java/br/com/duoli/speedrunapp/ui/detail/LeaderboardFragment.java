@@ -64,8 +64,15 @@ public class LeaderboardFragment extends Fragment implements
                 false);
 
         configureRecyclerView();
+        configureErrorTexts();
         return mBinding.getRoot();
 
+    }
+
+    private void configureErrorTexts() {
+        mBinding.errorLayout.setErrorText(getString(R.string.error_load_leaderboards_text));
+        mBinding.notFoundLayout.setNotFoundText(getString(R.string.not_found_leaderboard_text));
+        mBinding.loadingLayout.setLoadingText(getString(R.string.loading_leaderboards_text));
     }
 
     private void configureRecyclerView() {
@@ -93,26 +100,26 @@ public class LeaderboardFragment extends Fragment implements
     @Override
     public void displayLoading() {
         mBinding.recyclerView.setVisibility(View.INVISIBLE);
-        mBinding.loadingLayout.setVisibility(View.VISIBLE);
+        mBinding.loadingLayout.getRoot().setVisibility(View.VISIBLE);
         hideNotFound();
         hideError();
     }
 
     @Override
     public void hideLoading() {
-        mBinding.loadingLayout.setVisibility(View.GONE);
+        mBinding.loadingLayout.getRoot().setVisibility(View.GONE);
     }
 
     @Override
     public void displayNotFound() {
         mBinding.recyclerView.setVisibility(View.INVISIBLE);
-        mBinding.notFoundLayout.setVisibility(View.VISIBLE);
+        mBinding.notFoundLayout.getRoot().setVisibility(View.VISIBLE);
         hideLoading();
     }
 
     @Override
     public void hideNotFound() {
-        mBinding.notFoundLayout.setVisibility(View.GONE);
+        mBinding.notFoundLayout.getRoot().setVisibility(View.GONE);
     }
 
     @Override
