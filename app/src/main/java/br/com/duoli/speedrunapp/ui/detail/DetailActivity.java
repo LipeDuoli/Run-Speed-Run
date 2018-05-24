@@ -3,14 +3,20 @@ package br.com.duoli.speedrunapp.ui.detail;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.graphics.Palette;
 import android.view.View;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.List;
 
@@ -77,10 +83,55 @@ public class DetailActivity extends AppCompatActivity implements
         hideLoading();
         hideError();
         configureLeaderboardsTabsFor(game.getCategories());
+        loadGameCoverBitmap(game.getAssets().getCoverLarge().getUri());
+    }
+
+    private void loadGameCoverBitmap(String imageUrl) {
+        Picasso.get().load(imageUrl).into(new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                configureScreenColor(bitmap);
+            }
+
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                //do nothing
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+                //do nothing
+            }
+        });
+    }
+
+    public void configureScreenColor(Bitmap bitmap) {
+        Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
+            public void onGenerated(Palette p) {
+                Palette.Swatch vibrantSwatch = p.getVibrantSwatch();
+                Palette.Swatch darkSwatch = p.getDarkVibrantSwatch();
+                if (vibrantSwatch != null) {
+                    mBinding.toolbarLayout.setContentScrimColor(vibrantSwatch.getRgb());
+                    mBinding.toolbarLayout.setBackgroundColor(vibrantSwatch.getRgb());
+                    mBinding.toolbarLayout.setExpandedTitleColor(vibrantSwatch.getBodyTextColor());
+                    mBinding.toolbarLayout.setCollapsedTitleTextColor(vibrantSwatch.getBodyTextColor());
+
+                    mBinding.gameYear.setTextColor(vibrantSwatch.getBodyTextColor());
+                    mBinding.gamePlataform.setTextColor(vibrantSwatch.getBodyTextColor());
+
+                    mBinding.leaderboardTab.setBackgroundColor(vibrantSwatch.getRgb());
+                    mBinding.leaderboardTab.setTabTextColors(vibrantSwatch.getTitleTextColor(), vibrantSwatch.getBodyTextColor());
+                }
+                if (darkSwatch != null) {
+                    mBinding.toolbarLayout.setStatusBarScrimColor(darkSwatch.getRgb());
+                    mBinding.leaderboardTab.setSelectedTabIndicatorColor(darkSwatch.getRgb());
+                }
+            }
+        });
     }
 
     private void configureLeaderboardsTabsFor(List<Category> categories) {
-        for(Category category : categories){
+        for (Category category : categories) {
             mLeaderboardPagerAdapter.addFragment(
                     LeaderboardFragment.newInstance(mGameId, category.getId()),
                     category.getName());
