@@ -15,7 +15,7 @@
     <string name="loading_leaderboards_text">Loading Leaderboard</string>
     <string name="loading_latest_runs_text">Loading Latest Runs</string>
     <string name="not_found_games_text">No games found</string>
-    <string name="not_found_leaderboard_text">No leaderboard found</string>
+    <string name="not_found_leaderboard_text">No leaderboard found for this category</string>
     <string name="not_found_latest_runs_text">No Latest Runs found</string>
 
     <string name="sad_face_description">Sad Face Emotion</string>

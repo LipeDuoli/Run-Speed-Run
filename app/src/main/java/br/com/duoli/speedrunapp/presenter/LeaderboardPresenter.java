@@ -58,7 +58,7 @@ public class LeaderboardPresenter implements LeaderboardContract.Presenter {
                     public void onSuccess(Leaderboard leaderboard) {
                         mLeaderboard = leaderboard;
 
-                        if (mLeaderboard != null) {
+                        if (mLeaderboard != null && mLeaderboard.getRuns().size() > 0) {
                             mView.displayLeaderboard(mLeaderboard);
                         } else {
                             mView.displayNotFound();
