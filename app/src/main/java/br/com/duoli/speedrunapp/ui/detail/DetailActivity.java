@@ -65,6 +65,12 @@ public class DetailActivity extends AppCompatActivity implements
         super.onDestroy();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
     private void configureToolBar() {
         setSupportActionBar(mBinding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,6 +116,7 @@ public class DetailActivity extends AppCompatActivity implements
             public void onGenerated(Palette p) {
                 Palette.Swatch vibrantSwatch = p.getVibrantSwatch();
                 Palette.Swatch darkSwatch = p.getDarkVibrantSwatch();
+                Palette.Swatch darkMutedSwatch = p.getDarkMutedSwatch();
                 if (vibrantSwatch != null) {
                     mBinding.toolbarLayout.setContentScrimColor(vibrantSwatch.getRgb());
                     mBinding.toolbarLayout.setBackgroundColor(vibrantSwatch.getRgb());
@@ -125,6 +132,9 @@ public class DetailActivity extends AppCompatActivity implements
                 if (darkSwatch != null) {
                     mBinding.toolbarLayout.setStatusBarScrimColor(darkSwatch.getRgb());
                     mBinding.leaderboardTab.setSelectedTabIndicatorColor(darkSwatch.getRgb());
+                } else if (darkMutedSwatch != null){
+                    mBinding.toolbarLayout.setStatusBarScrimColor(darkMutedSwatch.getRgb());
+                    mBinding.leaderboardTab.setSelectedTabIndicatorColor(darkMutedSwatch.getRgb());
                 }
             }
         });
