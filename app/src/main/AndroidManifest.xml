@@ -26,6 +26,11 @@
             android:parentActivityName=".ui.main.MainActivity"
             android:launchMode="singleTop">
         </activity>
+
+        <provider
+            android:authorities="br.com.duoli.speedrunapp"
+            android:name=".data.SpeedRunProvider"
+            android:exported="false"/>
     </application>
 
 </manifest>
