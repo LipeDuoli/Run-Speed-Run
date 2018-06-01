@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.FragmentLeaderboardBinding;
@@ -152,10 +153,34 @@ public class LeaderboardFragment extends Fragment implements
         mLeaderboardPresenter.setView(this);
         mLeaderboardPresenter.loadData(mGameId, mCategoryId);
         mBinding.errorLayout.setPresenter(mLeaderboardPresenter);
+        mBinding.setFavoritePresenter(mLeaderboardPresenter);
+
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<LeaderboardContract.Presenter> loader) {
         //do nothing
+    }
+
+    @Override
+    public void showFavoriteAdded() {
+        Toast.makeText(getContext(), getString(R.string.favorite_saved_msg), Toast.LENGTH_SHORT).show();
+        mBinding.favoriteGameBtn.setImageResource(R.drawable.ic_star);
+    }
+
+    @Override
+    public void showErroAddFavorite() {
+        Toast.makeText(getContext(), getString(R.string.favorite_save_error_msg), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showFavoriteRemoved() {
+        Toast.makeText(getContext(), getString(R.string.favorite_removed_msg), Toast.LENGTH_SHORT).show();
+        mBinding.favoriteGameBtn.setImageResource(R.drawable.ic_star_border);
+    }
+
+    @Override
+    public void showErroRemoveFavorite() {
+        Toast.makeText(getContext(), getString(R.string.favorite_remove_error_msg), Toast.LENGTH_SHORT).show();
     }
 }

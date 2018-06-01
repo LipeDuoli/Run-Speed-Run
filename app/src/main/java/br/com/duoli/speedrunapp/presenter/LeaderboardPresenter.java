@@ -2,6 +2,7 @@ package br.com.duoli.speedrunapp.presenter;
 
 import android.util.Log;
 
+import br.com.duoli.speedrunapp.repository.FavoriteRepository;
 import br.com.duoli.speedrunapp.repository.LeaderboardRepository;
 import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
 import io.reactivex.Scheduler;
@@ -14,6 +15,7 @@ public class LeaderboardPresenter implements LeaderboardContract.Presenter {
     private final String TAG = LeaderboardPresenter.class.getSimpleName();
 
     private LeaderboardRepository mLeaderboardRepository;
+    private FavoriteRepository mFavoriteRepository;
     private Scheduler mScheduler;
     private CompositeDisposable mDisposable = new CompositeDisposable();
     private LeaderboardContract.View mView;
@@ -21,8 +23,11 @@ public class LeaderboardPresenter implements LeaderboardContract.Presenter {
     private String mGameId = "";
     private String mCategoryId = "";
 
-    public LeaderboardPresenter(LeaderboardRepository leaderboardRepository, Scheduler scheduler) {
+    public LeaderboardPresenter(LeaderboardRepository leaderboardRepository,
+                                FavoriteRepository favoriteRepository,
+                                Scheduler scheduler) {
         this.mLeaderboardRepository = leaderboardRepository;
+        this.mFavoriteRepository = favoriteRepository;
         this.mScheduler = scheduler;
     }
 
@@ -79,5 +84,30 @@ public class LeaderboardPresenter implements LeaderboardContract.Presenter {
             mView.displayLoading();
         }
         loadLeaderboard(mGameId, mCategoryId);
+    }
+
+    @Override
+    public void favoriteLeaderboard() {
+        boolean inserted = mFavoriteRepository.favoriteLeaderboard(mLeaderboard);
+        if (inserted) {
+            mView.showFavoriteAdded();
+        } else {
+            mView.showErroAddFavorite();
+        }
+    }
+
+    @Override
+    public void removeFavoriteLeaderboard() {
+        int count = mFavoriteRepository.removeFavoriteLeaderboard(mGameId, mCategoryId);
+        if (count > 0) {
+            mView.showFavoriteRemoved();
+        } else {
+            mView.showErroRemoveFavorite();
+        }
+    }
+
+    @Override
+    public boolean isLeaderboardFavorited() {
+        return mFavoriteRepository.isfavorited(mGameId, mCategoryId);
     }
 }

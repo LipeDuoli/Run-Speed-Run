@@ -33,4 +33,9 @@
     <string name="header_time">Time</string>
     <string name="video_description">Video Icon</string>
 
+    <string name="favorite_saved_msg">Leaderboard Saved</string>
+    <string name="favorite_save_error_msg">Erro on save Leaderboard</string>
+    <string name="favorite_removed_msg">Leaderboard Removed</string>
+    <string name="favorite_remove_error_msg">Error on remove Leaderboard</string>
+
 </resources>

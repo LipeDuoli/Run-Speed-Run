@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="favoritePresenter"
+            type="br.com.duoli.speedrunapp.presenter.SaveFavoritePresenter" />
+    </data>
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -76,6 +83,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recycler_view_header" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/favorite_game_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{() -> !favoritePresenter.isLeaderboardFavorited() ? favoritePresenter.favoriteLeaderboard() : favoritePresenter.removeFavoriteLeaderboard()}"
+            app:elevation="6dp"
+            app:favoriteIcon="@{favoritePresenter.isLeaderboardFavorited()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:pressedTranslationZ="6dp" />
 
     </android.support.constraint.ConstraintLayout>
 

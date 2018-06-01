@@ -7,6 +7,7 @@ import android.support.v4.content.Loader;
 
 import br.com.duoli.speedrunapp.presenter.LeaderboardContract;
 import br.com.duoli.speedrunapp.presenter.LeaderboardPresenter;
+import br.com.duoli.speedrunapp.repository.FavoriteRepositoryImpl;
 import br.com.duoli.speedrunapp.repository.LeaderboardRepositoryImpl;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -29,7 +30,7 @@ public class LeaderboardLoader extends Loader<LeaderboardContract.Presenter> {
 
     @Override
     protected void onForceLoad() {
-        deliverResult(new LeaderboardPresenter(new LeaderboardRepositoryImpl(), AndroidSchedulers.mainThread()));
+        deliverResult(new LeaderboardPresenter(new LeaderboardRepositoryImpl(), new FavoriteRepositoryImpl(getContext()), AndroidSchedulers.mainThread()));
     }
 
     @Override

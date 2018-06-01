@@ -24,7 +24,8 @@ public class LeaderboardRepositoryImpl implements LeaderboardRepository {
                 return mLeaderboardsSearch.toGame(gameId)
                         .toCategory(categoryId)
                         .embedResource(Embed.LeaderBoards.PLAYERS,
-                                Embed.LeaderBoards.GAME)
+                                Embed.LeaderBoards.GAME,
+                                Embed.LeaderBoards.CATEGORY)
                         .top(30)
                         .fetch();
             }

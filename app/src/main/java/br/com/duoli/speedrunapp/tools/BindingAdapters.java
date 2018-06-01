@@ -36,4 +36,13 @@ public class BindingAdapters {
             view.setText(year);
         }
     }
+
+    @BindingAdapter({"favoriteIcon"})
+    public static void setFavoriteIcon(ImageView view, boolean isFavorite){
+        if (isFavorite){
+            view.setImageResource(R.drawable.ic_star);
+        } else {
+            view.setImageResource(R.drawable.ic_star_border);
+        }
+    }
 }
