@@ -92,7 +92,7 @@ public class GamesFragment extends Fragment implements
 
     @Override
     public void displayGames(List<Game> gameList) {
-        mGameAdapter.setRuns(gameList);
+        mGameAdapter.setGames(gameList);
         mBinding.recyclerView.setVisibility(View.VISIBLE);
         mBinding.swipeRefresh.setRefreshing(false);
         hideError();

@@ -45,7 +45,7 @@ class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> {
         return mGames.size();
     }
 
-    public void setRuns(List<Game> games) {
+    public void setGames(List<Game> games) {
         this.mGames = games;
         notifyDataSetChanged();
     }
