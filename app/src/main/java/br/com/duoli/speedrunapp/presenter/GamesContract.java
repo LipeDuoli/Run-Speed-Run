@@ -8,7 +8,7 @@ public interface GamesContract {
 
     interface View extends BaseView {
 
-        void displayGames(List<Game> runList);
+        void displayGames(List<Game> gamesList);
 
     }
 
