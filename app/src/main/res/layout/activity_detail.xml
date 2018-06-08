@@ -75,7 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="@{game.platforms.get(0).name}"
+                        android:text="@{game.platforms.size() > 0 ? game.platforms.get(0).name : @string/empty_title}"
                         app:layout_constraintStart_toEndOf="@+id/game_cover"
                         app:layout_constraintTop_toBottomOf="@+id/game_year"
                         tools:text="Plataforma" />
