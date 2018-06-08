@@ -14,6 +14,7 @@ import android.view.MenuItem;
 
 import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.ActivityMainBinding;
+import br.com.duoli.speedrunapp.ui.main.favorites.FavoriteGamesFragment;
 import br.com.duoli.speedrunapp.ui.main.games.GamesFragment;
 import br.com.duoli.speedrunapp.ui.main.latestruns.LatestRunsFragment;
 import io.reactivex.functions.Consumer;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity
                 loadGamesFragment();
                 break;
             case R.id.nav_favorites:
-                //TODO load favorites activity
+                loadFavoriteGamesFragment();
                 break;
         }
 
@@ -111,6 +112,13 @@ public class MainActivity extends AppCompatActivity
         GamesFragment gamesFragment = GamesFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, gamesFragment)
+                .commit();
+    }
+
+    private void loadFavoriteGamesFragment() {
+        FavoriteGamesFragment favoriteGamesFragment = FavoriteGamesFragment.newInstance();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.contentFrame, favoriteGamesFragment)
                 .commit();
     }
 }

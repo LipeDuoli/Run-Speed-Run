@@ -5,8 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+
 import br.com.duoli.speedrunapp.data.SpeedRunContract.GameEntry;
+import br.com.duoli.speedrunapp.model.FavoriteGame;
 import br.com.duoli.sr4j.models.leaderboards.Leaderboard;
+import io.reactivex.Single;
 
 public class FavoriteRepositoryImpl implements FavoriteRepository {
 
@@ -53,11 +59,50 @@ public class FavoriteRepositoryImpl implements FavoriteRepository {
                 selectionArgs,
                 null);
 
+        boolean hasValue = false;
         if (query != null) {
-            boolean hasValue = query.getCount() >= 1;
+            hasValue = query.getCount() >= 1;
             query.close();
-            return hasValue;
         }
-        return false;
+        return hasValue;
+    }
+
+    @Override
+    public Single<List<FavoriteGame>> loadFavoriteGames() {
+        return Single.fromCallable(new Callable<List<FavoriteGame>>() {
+            @Override
+            public List<FavoriteGame> call() throws Exception {
+                Cursor query = mContext.getContentResolver().query(GameEntry.CONTENT_URI,
+                        null,
+                        null,
+                        null,
+                        GameEntry.COLUMN_GAME_NAME);
+
+                List<FavoriteGame> games = new ArrayList<>();
+                if (query != null) {
+                    while (query.moveToNext()) {
+                        String gameId = query.getString(query.getColumnIndex(GameEntry.COLUMN_GAME_ID));
+                        String gameName = query.getString(query.getColumnIndex(GameEntry.COLUMN_GAME_NAME));
+                        String gameCover = query.getString(query.getColumnIndex(GameEntry.COLUMN_GAME_COVER_PATH));
+                        String categoryId = query.getString(query.getColumnIndex(GameEntry.COLUMN_CATEGORY_ID));
+                        String categoryName = query.getString(query.getColumnIndex(GameEntry.COLUMN_CATEGORY_NAME));
+                        String firstPlaceId = query.getString(query.getColumnIndex(GameEntry.COLUMN_FIRST_PLACE_ID));
+                        String firstPlaceAsset = query.getString(query.getColumnIndex(GameEntry.COLUMN_FIRST_PLACE_ASSET_PATH));
+
+                        FavoriteGame favoriteGame = new FavoriteGame(gameId,
+                                gameName,
+                                gameCover,
+                                categoryId,
+                                categoryName,
+                                firstPlaceId,
+                                firstPlaceAsset);
+
+                        games.add(favoriteGame);
+                    }
+                    query.close();
+                }
+                return games;
+            }
+        });
     }
 }
