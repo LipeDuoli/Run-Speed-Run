@@ -24,6 +24,7 @@ import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.ActivityDetailBinding;
 import br.com.duoli.speedrunapp.presenter.DetailContract;
 import br.com.duoli.sr4j.models.categories.Category;
+import br.com.duoli.sr4j.models.categories.CategoryTypes;
 import br.com.duoli.sr4j.models.games.Game;
 
 public class DetailActivity extends AppCompatActivity implements
@@ -142,9 +143,11 @@ public class DetailActivity extends AppCompatActivity implements
 
     private void configureLeaderboardsTabsFor(List<Category> categories) {
         for (Category category : categories) {
-            mLeaderboardPagerAdapter.addFragment(
-                    LeaderboardFragment.newInstance(mGameId, category.getId()),
-                    category.getName());
+            if (category.getType() == CategoryTypes.PER_GAME) {
+                mLeaderboardPagerAdapter.addFragment(
+                        LeaderboardFragment.newInstance(mGameId, category.getId()),
+                        category.getName());
+            }
         }
         mLeaderboardPagerAdapter.notifyDataSetChanged();
     }
