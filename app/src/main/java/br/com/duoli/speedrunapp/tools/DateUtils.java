@@ -10,7 +10,7 @@ public class DateUtils {
     }
 
     public static String getYear(Date date){
-        DateFormat yearFormat = new SimpleDateFormat("YYYY");
+        DateFormat yearFormat = new SimpleDateFormat("yyyy");
         return yearFormat.format(date);
     }
 }
