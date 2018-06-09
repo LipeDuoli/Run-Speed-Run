@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         configureRxErrorHandle();
 
         if (savedInstanceState == null)
-            loadLatestRunsFragment();
+            initLatestRunsFragment();
     }
 
     private void configureRxErrorHandle() {
@@ -87,13 +88,13 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_latest:
-                loadLatestRunsFragment();
+                initLatestRunsFragment();
                 break;
             case R.id.nav_games:
-                loadGamesFragment();
+                initGamesFragment();
                 break;
             case R.id.nav_favorites:
-                loadFavoriteGamesFragment();
+                initFavoriteGamesFragment();
                 break;
         }
 
@@ -101,24 +102,37 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void loadLatestRunsFragment() {
+    private void initLatestRunsFragment() {
         LatestRunsFragment runsFragment = LatestRunsFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, runsFragment)
                 .commit();
+
+        changeToolbarTitle(getString(R.string.nav_latest));
     }
 
-    private void loadGamesFragment() {
+    private void initGamesFragment() {
         GamesFragment gamesFragment = GamesFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, gamesFragment)
                 .commit();
+
+        changeToolbarTitle(getString(R.string.nav_games));
     }
 
-    private void loadFavoriteGamesFragment() {
+    private void initFavoriteGamesFragment() {
         FavoriteGamesFragment favoriteGamesFragment = FavoriteGamesFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, favoriteGamesFragment)
                 .commit();
+
+        changeToolbarTitle(getString(R.string.nav_favorites));
+    }
+
+    private void changeToolbarTitle(String title) {
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null){
+            supportActionBar.setTitle(title);
+        }
     }
 }
