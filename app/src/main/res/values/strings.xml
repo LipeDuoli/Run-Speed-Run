@@ -14,15 +14,18 @@
     <string name="loading_games_text">Loading Games</string>
     <string name="loading_leaderboards_text">Loading Leaderboard</string>
     <string name="loading_latest_runs_text">Loading Latest Runs</string>
+    <string name="loading_favorites_text">Loading Favorites</string>
     <string name="not_found_games_text">No games found</string>
     <string name="not_found_leaderboard_text">No leaderboard found for this category</string>
     <string name="not_found_latest_runs_text">No Latest Runs found</string>
+    <string name="not_found_favorites_text">No Favorites found</string>
 
     <string name="sad_face_description">Sad Face Emotion</string>
     <string name="game_cover_description">Game Cover</string>
     <string name="error_load_games_text">Error on load Games</string>
     <string name="error_load_leaderboards_text">Error on load Leaderboard</string>
     <string name="error_load_latest_runs_text">Error on load Latest Runs</string>
+    <string name="error_load_favorites_text">Error on load Favorites</string>
     <string name="reload_button">Reload</string>
     <string name="game_not_found">Game not found</string>
     <string name="empty_title">\u0020</string>

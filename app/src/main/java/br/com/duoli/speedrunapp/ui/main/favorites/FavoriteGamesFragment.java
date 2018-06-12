@@ -56,7 +56,14 @@ public class FavoriteGamesFragment extends Fragment implements
 
         configureRecyclerView();
         configureSwipeRefresh();
+        configureErrorMessages();
         return mBinding.getRoot();
+    }
+
+    private void configureErrorMessages() {
+        mBinding.errorLayout.setErrorText(getString(R.string.error_load_favorites_text));
+        mBinding.notFoundLayout.setNotFoundText(getString(R.string.not_found_favorites_text));
+        mBinding.loadingLayout.setLoadingText(getString(R.string.loading_favorites_text));
     }
 
     private void configureSwipeRefresh() {
