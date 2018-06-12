@@ -30,20 +30,26 @@ public class GamesFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<GamesContract.Presenter> {
 
     private static final int LOADER_ID = 2000;
+    private static final String EXTRA_GAME_NAME = "extraGameName";
 
     private FragmentMainBinding mBinding;
     private GameAdapter mGameAdapter;
     private GamesContract.Presenter mGamePresenter;
     private EndlessRecyclerViewScrollListener mEndlessScrollListener;
+    private String gameName = "";
 
-    public static GamesFragment newInstance() {
+    public static GamesFragment newInstance(String gameName) {
         GamesFragment fragment = new GamesFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(EXTRA_GAME_NAME, gameName);
+        fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         getLoaderManager().initLoader(LOADER_ID, null, this);
+        gameName = getArguments().getString(EXTRA_GAME_NAME);
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -163,7 +169,7 @@ public class GamesFragment extends Fragment implements
     public void onLoadFinished(@NonNull Loader<GamesContract.Presenter> loader, GamesContract.Presenter data) {
         this.mGamePresenter = data;
         mGamePresenter.setView(this);
-        mGamePresenter.loadData();
+        mGamePresenter.loadData(gameName);
         mBinding.errorLayout.setPresenter(mGamePresenter);
     }
 

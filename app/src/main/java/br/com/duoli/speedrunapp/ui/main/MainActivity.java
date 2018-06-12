@@ -1,5 +1,8 @@
 package br.com.duoli.speedrunapp.ui.main;
 
+import android.app.SearchManager;
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -8,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -25,10 +29,12 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String All_GAMES = "";
 
     private ActivityMainBinding mBinding;
     private Toolbar mToolbar;
     private DrawerLayout mDrawer;
+    private NavigationView mNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +53,26 @@ public class MainActivity extends AppCompatActivity
         RxJavaPlugins.setErrorHandler(new Consumer<Throwable>() {
             @Override
             public void accept(Throwable throwable) throws Exception {
-                Log.e(TAG,"Error on clear disposable: " + throwable.toString());
+                Log.e(TAG, "Error on clear disposable: " + throwable.toString());
             }
         });
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleIntent(intent);
+
+    }
+
+    private void handleIntent(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            initGamesFragment(query);
+
+            MenuItem item = mNavigationView.getMenu().findItem(R.id.nav_games);
+            item.setChecked(true);
+        }
     }
 
     private void configureToolbar() {
@@ -64,8 +87,8 @@ public class MainActivity extends AppCompatActivity
         mDrawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = mBinding.navView;
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = mBinding.navView;
+        mNavigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -80,7 +103,19 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main_menu, menu);
+
+        configureSearchMenu(menu);
+
         return true;
+    }
+
+    private void configureSearchMenu(Menu menu) {
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView =
+                (SearchView) menu.findItem(R.id.action_search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -91,7 +126,7 @@ public class MainActivity extends AppCompatActivity
                 initLatestRunsFragment();
                 break;
             case R.id.nav_games:
-                initGamesFragment();
+                initGamesFragment(All_GAMES);
                 break;
             case R.id.nav_favorites:
                 initFavoriteGamesFragment();
@@ -111,8 +146,8 @@ public class MainActivity extends AppCompatActivity
         changeToolbarTitle(getString(R.string.nav_latest));
     }
 
-    private void initGamesFragment() {
-        GamesFragment gamesFragment = GamesFragment.newInstance();
+    private void initGamesFragment(String gameName) {
+        GamesFragment gamesFragment = GamesFragment.newInstance(gameName);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.contentFrame, gamesFragment)
                 .commit();
@@ -131,7 +166,7 @@ public class MainActivity extends AppCompatActivity
 
     private void changeToolbarTitle(String title) {
         ActionBar supportActionBar = getSupportActionBar();
-        if (supportActionBar != null){
+        if (supportActionBar != null) {
             supportActionBar.setTitle(title);
         }
     }

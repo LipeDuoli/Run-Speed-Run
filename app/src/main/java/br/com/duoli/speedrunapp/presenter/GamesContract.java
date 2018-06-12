@@ -14,7 +14,7 @@ public interface GamesContract {
 
     interface Presenter extends ReloadPresenter {
 
-        void loadData();
+        void loadData(String gameName);
 
         void setView(GamesContract.View view);
 

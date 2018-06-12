@@ -18,11 +18,11 @@ public class GamesRepositoryImpl implements GamesRepository {
     }
 
     @Override
-    public Single<PageableList<Game>> getGames(final int pageOffset) {
+    public Single<PageableList<Game>> getGames(final String gameName, final int pageOffset) {
         return Single.fromCallable(new Callable<PageableList<Game>>() {
             @Override
             public PageableList<Game> call() {
-                return gameSearch.offset(pageOffset).fetch();
+                return gameSearch.withName(gameName).offset(pageOffset).fetch();
             }
         });
     }

@@ -24,6 +24,7 @@ public class GamesPresenter implements GamesContract.Presenter {
     private GamesContract.View mView;
     private List<Game> mGames;
     private Pagination mLastPage;
+    private String gameName;
 
     public GamesPresenter(GamesRepository gamesRepository, Scheduler scheduler) {
         mGamesRepository = gamesRepository;
@@ -36,7 +37,8 @@ public class GamesPresenter implements GamesContract.Presenter {
     }
 
     @Override
-    public void loadData() {
+    public void loadData(String gameName) {
+        this.gameName = gameName;
         mView.displayLoading();
         if (mGames != null){
             mView.displayGames(mGames);
@@ -64,7 +66,7 @@ public class GamesPresenter implements GamesContract.Presenter {
     }
 
     private void loadGames(final int page) {
-        disposable.add(mGamesRepository.getGames(page)
+        disposable.add(mGamesRepository.getGames(gameName, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(mScheduler)
                 .subscribeWith(new DisposableSingleObserver<PageableList<Game>>() {
