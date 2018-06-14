@@ -55,7 +55,7 @@ public class LeaderboardPresenter implements LeaderboardContract.Presenter {
     }
 
     private void loadLeaderboard(String gameId, String categoryId) {
-        mDisposable.add(mLeaderboardRepository.getLeaderboard(gameId, categoryId)
+        mDisposable.add(mLeaderboardRepository.getLeaderboard(gameId, categoryId, 30)
                 .subscribeOn(Schedulers.io())
                 .observeOn(mScheduler)
                 .subscribeWith(new DisposableSingleObserver<Leaderboard>() {

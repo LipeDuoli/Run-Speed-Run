@@ -50,6 +50,8 @@ dependencies {
     implementation 'joda-time:joda-time:2.9.9'
     implementation "com.ibm.icu:icu4j:61.1"
 
+    implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.18.0'
 

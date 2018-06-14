@@ -5,5 +5,5 @@ import io.reactivex.Single;
 
 public interface LeaderboardRepository {
 
-    Single<Leaderboard> getLeaderboard(String gameId, String categoryId);
+    Single<Leaderboard> getLeaderboard(String gameId, String categoryId, int topN);
 }

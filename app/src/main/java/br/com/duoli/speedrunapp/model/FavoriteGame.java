@@ -2,6 +2,7 @@ package br.com.duoli.speedrunapp.model;
 
 public class FavoriteGame {
 
+    private int id;
     private String gameId;
     private String gameName;
     private String gameCoverPath;
@@ -13,7 +14,8 @@ public class FavoriteGame {
     public FavoriteGame() {
     }
 
-    public FavoriteGame(String gameId, String gameName, String gameCoverPath, String categoryId, String categoryName, String firstPlaceId, String firstPlaceAssetPath) {
+    public FavoriteGame(int id, String gameId, String gameName, String gameCoverPath, String categoryId, String categoryName, String firstPlaceId, String firstPlaceAssetPath) {
+        this.id = id;
         this.gameId = gameId;
         this.gameName = gameName;
         this.gameCoverPath = gameCoverPath;
@@ -21,6 +23,14 @@ public class FavoriteGame {
         this.categoryName = categoryName;
         this.firstPlaceId = firstPlaceId;
         this.firstPlaceAssetPath = firstPlaceAssetPath;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getGameId() {

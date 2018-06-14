@@ -81,6 +81,7 @@ public class FavoriteRepositoryImpl implements FavoriteRepository {
                 List<FavoriteGame> games = new ArrayList<>();
                 if (query != null) {
                     while (query.moveToNext()) {
+                        int id = query.getInt(query.getColumnIndex(GameEntry._ID));
                         String gameId = query.getString(query.getColumnIndex(GameEntry.COLUMN_GAME_ID));
                         String gameName = query.getString(query.getColumnIndex(GameEntry.COLUMN_GAME_NAME));
                         String gameCover = query.getString(query.getColumnIndex(GameEntry.COLUMN_GAME_COVER_PATH));
@@ -89,7 +90,8 @@ public class FavoriteRepositoryImpl implements FavoriteRepository {
                         String firstPlaceId = query.getString(query.getColumnIndex(GameEntry.COLUMN_FIRST_PLACE_ID));
                         String firstPlaceAsset = query.getString(query.getColumnIndex(GameEntry.COLUMN_FIRST_PLACE_ASSET_PATH));
 
-                        FavoriteGame favoriteGame = new FavoriteGame(gameId,
+                        FavoriteGame favoriteGame = new FavoriteGame(id,
+                                gameId,
                                 gameName,
                                 gameCover,
                                 categoryId,

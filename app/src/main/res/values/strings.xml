@@ -40,6 +40,11 @@
     <string name="favorite_save_error_msg">Erro on save Leaderboard</string>
     <string name="favorite_removed_msg">Leaderboard Removed</string>
     <string name="favorite_remove_error_msg">Error on remove Leaderboard</string>
+
     <string name="search_hint">Game name</string>
+
+    <string name="main_notification_channel_name">Primary</string>
+    <string name="notification_title">First Place Taken</string>
+    <string name="notification_body">%1$s has a new record for category %2$s</string>
 
 </resources>

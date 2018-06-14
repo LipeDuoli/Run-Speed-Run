@@ -19,6 +19,7 @@ import android.view.MenuItem;
 
 import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.ActivityMainBinding;
+import br.com.duoli.speedrunapp.tools.LeaderboardNotificationUtils;
 import br.com.duoli.speedrunapp.ui.main.favorites.FavoriteGamesFragment;
 import br.com.duoli.speedrunapp.ui.main.games.GamesFragment;
 import br.com.duoli.speedrunapp.ui.main.latestruns.LatestRunsFragment;
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity
 
         if (savedInstanceState == null)
             initLatestRunsFragment();
+
+        LeaderboardNotificationUtils.scheduleLeaderboardCheck(this);
     }
 
     private void configureRxErrorHandle() {

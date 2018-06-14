@@ -17,7 +17,7 @@ public class LeaderboardRepositoryImpl implements LeaderboardRepository {
     }
 
     @Override
-    public Single<Leaderboard> getLeaderboard(final String gameId, final String categoryId) {
+    public Single<Leaderboard> getLeaderboard(final String gameId, final String categoryId, final int topN) {
         return Single.fromCallable(new Callable<Leaderboard>() {
             @Override
             public Leaderboard call() {
@@ -26,7 +26,7 @@ public class LeaderboardRepositoryImpl implements LeaderboardRepository {
                         .embedResource(Embed.LeaderBoards.PLAYERS,
                                 Embed.LeaderBoards.GAME,
                                 Embed.LeaderBoards.CATEGORY)
-                        .top(30)
+                        .top(topN)
                         .fetch();
             }
         });
