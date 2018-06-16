@@ -32,7 +32,10 @@ public class NotificationUtils {
     private NotificationUtils() {
     }
 
-    public static void showHasNewLeaderboard(final Context context, final FavoriteGame game) {
+    public static void showHasNewLeaderboard(final Context context,
+                                             final FavoriteGame game,
+                                             final String playerName,
+                                             final String primaryTime) {
         final NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -48,7 +51,12 @@ public class NotificationUtils {
         Picasso.get().load(game.getFirstPlaceAssetPath()).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                Notification notification = buildNotification(context, game, bitmap);
+                Notification notification = buildNotification(context,
+                        game,
+                        bitmap,
+                        playerName,
+                        primaryTime);
+
                 notificationManager.notify(game.getId(), notification);
             }
 
@@ -56,7 +64,12 @@ public class NotificationUtils {
             public void onBitmapFailed(Exception e, Drawable errorDrawable) {
                 Log.e(TAG, "onBitmapFailed: ", e);
 
-                Notification notification = buildNotification(context, game, null);
+                Notification notification = buildNotification(context,
+                        game,
+                        null,
+                        playerName,
+                        primaryTime);
+
                 notificationManager.notify(game.getId(), notification);
             }
 
@@ -79,17 +92,25 @@ public class NotificationUtils {
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
-    private static Notification buildNotification(Context context, FavoriteGame game, Bitmap gameImage) {
+    private static Notification buildNotification(Context context,
+                                                  FavoriteGame game,
+                                                  Bitmap gameImage,
+                                                  String playerName,
+                                                  String time) {
+        String title = context.getString(R.string.notification_title, game.getGameName());
         String bodyText = context.getString(R.string.notification_body,
-                game.getGameName(),
-                game.getCategoryName());
+                game.getCategoryName(),
+                StringUtils.parseRunTime(time),
+                playerName);
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat
                 .Builder(context, LEADERBOARD_NOTIFICATION_CHANNEL_ID)
                 .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                 .setSmallIcon(R.drawable.ic_trophy)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(bodyText))
-                .setContentTitle(context.getString(R.string.notification_title))
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .setBigContentTitle(title)
+                        .bigText(bodyText))
+                .setContentTitle(title)
                 .setContentText(bodyText)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setContentIntent(contentIntent(context, game.getGameId()))

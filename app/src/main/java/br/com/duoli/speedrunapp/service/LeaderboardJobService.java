@@ -25,11 +25,15 @@ public class LeaderboardJobService extends JobService {
 
     private static final String TAG = LeaderboardJobService.class.getSimpleName();
     private CompositeDisposable disposable = new CompositeDisposable();
+    private Context context;
+    private FavoriteRepository favoriteRepository;
+    private LeaderboardRepository leaderboardRepository;
 
     @Override
     public boolean onStartJob(final JobParameters job) {
-        Context context = LeaderboardJobService.this;
-        FavoriteRepository favoriteRepository = new FavoriteRepositoryImpl(context);
+        context = LeaderboardJobService.this;
+        favoriteRepository = new FavoriteRepositoryImpl(context);
+        leaderboardRepository = new LeaderboardRepositoryImpl();
 
         disposable.add(favoriteRepository.loadFavoriteGames()
                 .subscribeOn(Schedulers.io())
@@ -53,8 +57,8 @@ public class LeaderboardJobService extends JobService {
     }
 
     private void checkFirstPlace(final FavoriteGame game) {
-        LeaderboardRepository leaderboardRepository = new LeaderboardRepositoryImpl();
-        disposable.add(leaderboardRepository.getLeaderboard(game.getGameId(), game.getCategoryId(), 1)
+        disposable.add(leaderboardRepository
+                .getLeaderboard(game.getGameId(), game.getCategoryId(), 1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Leaderboard>() {
@@ -64,8 +68,12 @@ public class LeaderboardJobService extends JobService {
                             Run run = leaderboard.getRuns().get(0).getRun();
                             if (!run.getId().equals(game.getFirstPlaceId())) {
                                 NotificationUtils.showHasNewLeaderboard(
-                                        LeaderboardJobService.this,
-                                        game);
+                                        context,
+                                        game,
+                                        run.getPlayers().get(0).getName(),
+                                        run.getTimes().getPrimary());
+
+                                favoriteRepository.updateFirstPlace(game.getId(), run.getId());
                             }
                         }
                     }

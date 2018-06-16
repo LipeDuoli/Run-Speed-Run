@@ -1,5 +1,6 @@
 package br.com.duoli.speedrunapp.repository;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -106,5 +107,15 @@ public class FavoriteRepositoryImpl implements FavoriteRepository {
                 return games;
             }
         });
+    }
+
+    @Override
+    public void updateFirstPlace(int id, String newFirstPlaceId) {
+        Uri uri = ContentUris.withAppendedId(GameEntry.CONTENT_URI, id);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(GameEntry.COLUMN_FIRST_PLACE_ID, newFirstPlaceId);
+
+        mContext.getContentResolver().update(uri, contentValues, null, null);
     }
 }

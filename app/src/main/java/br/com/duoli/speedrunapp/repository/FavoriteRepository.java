@@ -15,4 +15,6 @@ public interface FavoriteRepository {
     boolean isfavorited(String gameId, String categoryId);
 
     Single<List<FavoriteGame>> loadFavoriteGames();
+
+    void updateFirstPlace(int id, String newFirstPlaceId);
 }
