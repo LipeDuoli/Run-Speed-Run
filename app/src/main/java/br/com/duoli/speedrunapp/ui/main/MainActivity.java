@@ -17,6 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.ActivityMainBinding;
 import br.com.duoli.speedrunapp.tools.LeaderboardNotificationUtils;
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String All_GAMES = "";
 
+    private FirebaseAnalytics mFirebaseAnalytics;
     private ActivityMainBinding mBinding;
     private Toolbar mToolbar;
     private DrawerLayout mDrawer;
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         configureToolbar();
         configureNavigationDrawer();
@@ -49,7 +55,15 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null)
             initLatestRunsFragment();
 
+        configureAds();
+
         LeaderboardNotificationUtils.scheduleLeaderboardCheck(this);
+    }
+
+    private void configureAds() {
+        MobileAds.initialize(this, getString(R.string.admob_app_id));
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mBinding.adView.loadAd(adRequest);
     }
 
     private void configureRxErrorHandle() {

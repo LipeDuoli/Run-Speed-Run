@@ -51,4 +51,7 @@
     <string name="widget_text">%1$s | %2$s</string>
     <string name="widget_empty_list">No games to display</string>
 
+    <string name="admob_app_id">ca-app-pub-9024902600072738~8078435265</string>
+    <string name="admob_main_bottom">ca-app-pub-9024902600072738/8777149704</string>
+
 </resources>

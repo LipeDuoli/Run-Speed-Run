@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "201206838199",
+    "firebase_url": "https://speedrunapp-c1240.firebaseio.com",
+    "project_id": "speedrunapp-c1240",
+    "storage_bucket": "speedrunapp-c1240.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201206838199:android:4fa219745c5a2d57",
+        "android_client_info": {
+          "package_name": "br.com.duoli.speedrunapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201206838199-d8fobj243lclm45ceehduggmb9scjrlj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.duoli.speedrunapp",
+            "certificate_hash": "21a36339afe99c4f8831e5a7bc86b002d20ebe1f"
+          }
+        },
+        {
+          "client_id": "201206838199-9v354soppd93547jlukqdpil2lv3qkmb.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "201206838199-9v354soppd93547jlukqdpil2lv3qkmb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbYnDsQPJFLgXfo3UpRBW3C8kga9-5EO4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201206838199-9v354soppd93547jlukqdpil2lv3qkmb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
