@@ -70,7 +70,6 @@ public class LeaderboardJobService extends JobService {
                                 NotificationUtils.showHasNewLeaderboard(
                                         context,
                                         game,
-                                        run.getPlayers().get(0).getName(),
                                         run.getTimes().getPrimary());
 
                                 favoriteRepository.updateFirstPlace(game.getId(), run.getId());

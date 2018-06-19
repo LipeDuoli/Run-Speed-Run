@@ -45,7 +45,7 @@
 
     <string name="main_notification_channel_name">Primary</string>
     <string name="notification_title">%1$s has a new first place</string>
-    <string name="notification_body">Category %1$s has a new record of %2$s by %3$s</string>
+    <string name="notification_body">Category %1$s has a new record of %2$s</string>
 
     <string name="appwidget_title_text">Latest Runs</string>
     <string name="widget_text">%1$s | %2$s</string>

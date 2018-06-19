@@ -25,8 +25,6 @@ import br.com.duoli.speedrunapp.ui.main.MainActivity;
 public class NotificationUtils {
 
     private static final String TAG = NotificationUtils.class.getSimpleName();
-    private static final int LEADERBOARD_PENDING_INTENT_ID = 2022;
-
     private static final String LEADERBOARD_NOTIFICATION_CHANNEL_ID = "leaderboard_notification_channel";
 
     private NotificationUtils() {
@@ -34,7 +32,6 @@ public class NotificationUtils {
 
     public static void showHasNewLeaderboard(final Context context,
                                              final FavoriteGame game,
-                                             final String playerName,
                                              final String primaryTime) {
         final NotificationManager notificationManager = (NotificationManager)
                 context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -54,7 +51,6 @@ public class NotificationUtils {
                 Notification notification = buildNotification(context,
                         game,
                         bitmap,
-                        playerName,
                         primaryTime);
 
                 notificationManager.notify(game.getId(), notification);
@@ -67,7 +63,6 @@ public class NotificationUtils {
                 Notification notification = buildNotification(context,
                         game,
                         null,
-                        playerName,
                         primaryTime);
 
                 notificationManager.notify(game.getId(), notification);
@@ -80,7 +75,7 @@ public class NotificationUtils {
         });
     }
 
-    private static PendingIntent contentIntent(Context context, String gameId) {
+    private static PendingIntent contentIntent(Context context, String gameId, int id) {
         Intent startActivityIntent = DetailActivity.newInstance(context, gameId);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
@@ -88,20 +83,18 @@ public class NotificationUtils {
         stackBuilder.addNextIntent(startActivityIntent);
 
         return stackBuilder.getPendingIntent(
-                LEADERBOARD_PENDING_INTENT_ID,
+                id,
                 PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     private static Notification buildNotification(Context context,
                                                   FavoriteGame game,
                                                   Bitmap gameImage,
-                                                  String playerName,
                                                   String time) {
         String title = context.getString(R.string.notification_title, game.getGameName());
         String bodyText = context.getString(R.string.notification_body,
                 game.getCategoryName(),
-                StringUtils.parseRunTime(time),
-                playerName);
+                StringUtils.parseRunTime(time));
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat
                 .Builder(context, LEADERBOARD_NOTIFICATION_CHANNEL_ID)
@@ -113,7 +106,7 @@ public class NotificationUtils {
                 .setContentTitle(title)
                 .setContentText(bodyText)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
-                .setContentIntent(contentIntent(context, game.getGameId()))
+                .setContentIntent(contentIntent(context, game.getGameId(), game.getId()))
                 .setAutoCancel(true);
 
         if (gameImage != null) {
