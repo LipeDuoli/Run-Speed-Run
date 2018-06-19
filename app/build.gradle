@@ -1,6 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'speedrun'
+            keyPassword 'speedrun'
+            storeFile file('speedrun.jks')
+            storePassword 'speedrun'
+        }
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('debug.keystore')
+            storePassword 'android'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "br.com.duoli.speedrunapp"
@@ -15,12 +29,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+            signingConfig signingConfigs.debug
+            versionNameSuffix '-debug'
         }
     }
     dataBinding {
         enabled = true
     }
-
     testOptions {
         unitTests.returnDefaultValues = true
     }
@@ -33,7 +53,6 @@ ext {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(path: ':sr4j')
-
     implementation "com.android.support:appcompat-v7:${supportLibVersion}"
     implementation "com.android.support:palette-v7:${supportLibVersion}"
     implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
@@ -41,20 +60,14 @@ dependencies {
     implementation "com.android.support:design:${supportLibVersion}"
     implementation "com.android.support:exifinterface:${supportLibVersion}"
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
-
     implementation 'com.squareup.picasso:picasso:2.71828'
-
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
-
     implementation 'joda-time:joda-time:2.9.9'
-    implementation "com.ibm.icu:icu4j:61.1"
-
+    implementation 'com.ibm.icu:icu4j:61.1'
     implementation 'com.firebase:firebase-jobdispatcher:0.8.5'
-
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-core:2.18.0'
-
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }
