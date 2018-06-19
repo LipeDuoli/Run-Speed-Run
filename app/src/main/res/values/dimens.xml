@@ -21,4 +21,6 @@
     <dimen name="leaderboard_player_margin">16dp</dimen>
     <dimen name="leaderboard_time_margin">8dp</dimen>
     <dimen name="leaderboard_header_height">48dp</dimen>
+
+    <dimen name="widget_margin">8dp</dimen>
 </resources>
