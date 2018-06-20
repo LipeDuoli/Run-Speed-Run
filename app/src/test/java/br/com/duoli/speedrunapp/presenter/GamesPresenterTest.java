@@ -24,6 +24,9 @@ import static org.mockito.Mockito.when;
 
 public class GamesPresenterTest {
 
+    private static final String ALL_GAMES = "";
+    private static final int FIRST_PAGE = 0;
+
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
@@ -56,36 +59,36 @@ public class GamesPresenterTest {
 
     @Test
     public void shouldPassRunsToView() {
-        when(gamesRepository.getGames(0)).thenReturn(Single.just(manyGameList));
+        when(gamesRepository.getGames(ALL_GAMES, FIRST_PAGE)).thenReturn(Single.just(manyGameList));
 
-        presenter.loadData();
+        presenter.loadData(ALL_GAMES);
 
         verify(view).displayGames(manyGameList.getData());
     }
 
     @Test
     public void shouldDisplayLoadingViewWhenLoadRuns(){
-        when(gamesRepository.getGames(0)).thenReturn(Single.just(manyGameList));
+        when(gamesRepository.getGames(ALL_GAMES, FIRST_PAGE)).thenReturn(Single.just(manyGameList));
 
-        presenter.loadData();
+        presenter.loadData(ALL_GAMES);
 
         verify(view).displayLoading();
     }
 
     @Test
     public void shouldDisplayNotFountLayoutWithEmptyResult(){
-        when(gamesRepository.getGames(0)).thenReturn(Single.just(emptyGameList));
+        when(gamesRepository.getGames(ALL_GAMES, FIRST_PAGE)).thenReturn(Single.just(emptyGameList));
 
-        presenter.loadData();
+        presenter.loadData(ALL_GAMES);
 
         verify(view).displayNotFound();
     }
 
     @Test
     public void shouldHandleError(){
-        when(gamesRepository.getGames(0)).thenReturn(Single.<PageableList<Game>>error(new Throwable()));
+        when(gamesRepository.getGames(ALL_GAMES, FIRST_PAGE)).thenReturn(Single.<PageableList<Game>>error(new Throwable()));
 
-        presenter.loadData();
+        presenter.loadData(ALL_GAMES);
 
         verify(view).displayError();
     }
