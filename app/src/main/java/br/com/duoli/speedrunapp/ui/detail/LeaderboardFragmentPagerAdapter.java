@@ -13,7 +13,7 @@ public class LeaderboardFragmentPagerAdapter extends FragmentPagerAdapter {
     private List<LeaderboardFragment> mFragmentList;
     private List<String> mTitleList;
 
-    public LeaderboardFragmentPagerAdapter(FragmentManager fm) {
+    LeaderboardFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
         mFragmentList = new ArrayList<>();
         mTitleList = new ArrayList<>();

@@ -20,7 +20,6 @@ import br.com.duoli.speedrunapp.R;
 import br.com.duoli.speedrunapp.databinding.FragmentMainBinding;
 import br.com.duoli.speedrunapp.model.FavoriteGame;
 import br.com.duoli.speedrunapp.presenter.FavoriteContract;
-import br.com.duoli.speedrunapp.tools.EndlessRecyclerViewScrollListener;
 import br.com.duoli.speedrunapp.ui.detail.DetailActivity;
 
 public class FavoriteGamesFragment extends Fragment implements
@@ -33,7 +32,6 @@ public class FavoriteGamesFragment extends Fragment implements
     private FragmentMainBinding mBinding;
     private FavoriteGameAdapter mGameAdapter;
     private FavoriteContract.Presenter mGamePresenter;
-    private EndlessRecyclerViewScrollListener mEndlessScrollListener;
 
     public static FavoriteGamesFragment newInstance() {
         FavoriteGamesFragment fragment = new FavoriteGamesFragment();

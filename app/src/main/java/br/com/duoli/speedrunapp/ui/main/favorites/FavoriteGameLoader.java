@@ -15,7 +15,7 @@ public class FavoriteGameLoader extends Loader<FavoriteContract.Presenter> {
 
     private FavoriteContract.Presenter mPresenter;
 
-    public FavoriteGameLoader(@NonNull Context context) {
+    FavoriteGameLoader(@NonNull Context context) {
         super(context);
     }
 

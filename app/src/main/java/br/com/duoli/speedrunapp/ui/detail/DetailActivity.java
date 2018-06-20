@@ -112,7 +112,7 @@ public class DetailActivity extends AppCompatActivity implements
         });
     }
 
-    public void configureScreenColor(Bitmap bitmap) {
+    private void configureScreenColor(Bitmap bitmap) {
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
             public void onGenerated(Palette p) {
                 Palette.Swatch vibrantSwatch = p.getVibrantSwatch();

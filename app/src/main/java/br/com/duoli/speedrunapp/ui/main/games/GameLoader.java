@@ -1,6 +1,5 @@
 package br.com.duoli.speedrunapp.ui.main.games;
 
-
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,7 +14,7 @@ public class GameLoader extends Loader<GamesContract.Presenter> {
 
     private GamesContract.Presenter mPresenter;
 
-    public GameLoader(@NonNull Context context) {
+    GameLoader(@NonNull Context context) {
         super(context);
     }
 

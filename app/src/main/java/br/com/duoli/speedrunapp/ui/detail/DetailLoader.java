@@ -15,7 +15,7 @@ public class DetailLoader extends Loader<DetailContract.Presenter> {
 
     private DetailContract.Presenter mPresenter;
 
-    public DetailLoader(@NonNull Context context) {
+    DetailLoader(@NonNull Context context) {
         super(context);
     }
 

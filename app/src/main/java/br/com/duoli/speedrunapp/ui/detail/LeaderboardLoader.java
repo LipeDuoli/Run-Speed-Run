@@ -15,7 +15,7 @@ public class LeaderboardLoader extends Loader<LeaderboardContract.Presenter> {
 
     private LeaderboardContract.Presenter mPresenter;
 
-    public LeaderboardLoader(@NonNull Context context) {
+    LeaderboardLoader(@NonNull Context context) {
         super(context);
     }
 

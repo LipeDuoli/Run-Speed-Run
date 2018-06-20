@@ -15,7 +15,7 @@ public class LatestRunLoader extends Loader<LatestRunContract.Presenter> {
 
     private LatestRunContract.Presenter mPresenter;
 
-    public LatestRunLoader(@NonNull Context context) {
+    LatestRunLoader(@NonNull Context context) {
         super(context);
     }
 
