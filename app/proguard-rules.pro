@@ -53,4 +53,11 @@
 
 -keep class android.support.v7.widget.SearchView { *; }
 
--keep class br.com.duoli.sr4j.**
+-keep class br.com.duoli.sr4j.** { *; }
+
+# crashlytics
+-keep class com.google.android.gms.measurement.AppMeasurement { *; }
+-keep class com.google.android.gms.measurement.AppMeasurement$OnEventListener { *; }
+
+# ICU library
+-keep class com.ibm.icu.** { *; }
