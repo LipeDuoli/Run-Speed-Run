@@ -16,12 +16,12 @@ import br.com.duoli.speedrunapp.R;
 public class BindingAdapters {
 
     @BindingAdapter({"userName", "runTime"})
-    public static void setRunTime(TextView view, String userName, String runTime){
+    public static void setRunTime(TextView view, String userName, String runTime) {
         Context context = view.getContext();
         String text = context.getResources().getString(R.string.latest_run_time_format,
                 StringUtils.parseRunTime(runTime),
                 userName);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             view.setText(Html.fromHtml(text, Html.FROM_HTML_MODE_COMPACT));
         } else {
             view.setText(Html.fromHtml(text));
@@ -29,14 +29,14 @@ public class BindingAdapters {
     }
 
     @BindingAdapter({"cover"})
-    public static void setGameCover(ImageView view, String url){
+    public static void setGameCover(ImageView view, String url) {
         Picasso.get()
                 .load(url)
                 .into(view);
     }
 
     @BindingAdapter({"gameYear"})
-    public static void setGameYear(TextView view, Date date){
+    public static void setGameYear(TextView view, Date date) {
         if (date != null) {
             String year = DateUtils.getYear(date);
             view.setText(year);
@@ -44,8 +44,8 @@ public class BindingAdapters {
     }
 
     @BindingAdapter({"favoriteIcon"})
-    public static void setFavoriteIcon(ImageView view, boolean isFavorite){
-        if (isFavorite){
+    public static void setFavoriteIcon(ImageView view, boolean isFavorite) {
+        if (isFavorite) {
             view.setImageResource(R.drawable.ic_star);
         } else {
             view.setImageResource(R.drawable.ic_star_border);
