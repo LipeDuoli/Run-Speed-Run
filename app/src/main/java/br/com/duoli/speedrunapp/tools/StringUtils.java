@@ -27,7 +27,7 @@ public class StringUtils {
             stringBuilder.append(period.getMillis());
             stringBuilder.append("ms ");
         }
-        stringBuilder.deleteCharAt(stringBuilder.length()-1);
+        stringBuilder.trimToSize();
 
         return stringBuilder.toString();
     }

@@ -85,7 +85,7 @@ public class DetailActivity extends AppCompatActivity implements
         if (getIntent().hasExtra(GAME_ID)) {
             mGameId = getIntent().getStringExtra(GAME_ID);
         }
-        if (getIntent().hasExtra(CATEGORY_ID)){
+        if (getIntent().hasExtra(CATEGORY_ID)) {
             mCategoryId = getIntent().getStringExtra(CATEGORY_ID);
         }
     }
@@ -105,9 +105,9 @@ public class DetailActivity extends AppCompatActivity implements
         if (categoryId.isEmpty())
             return;
 
-        for (int i = 0; i < categoryPositions.size(); i++){
+        for (int i = 0; i < categoryPositions.size(); i++) {
             String id = categoryPositions.get(i);
-            if (id.equals(categoryId)){
+            if (id.equals(categoryId)) {
                 mBinding.leaderboardViewpager.setCurrentItem(i);
                 break;
             }
@@ -154,7 +154,7 @@ public class DetailActivity extends AppCompatActivity implements
                 if (darkSwatch != null) {
                     mBinding.toolbarLayout.setStatusBarScrimColor(darkSwatch.getRgb());
                     mBinding.leaderboardTab.setSelectedTabIndicatorColor(darkSwatch.getRgb());
-                } else if (darkMutedSwatch != null){
+                } else if (darkMutedSwatch != null) {
                     mBinding.toolbarLayout.setStatusBarScrimColor(darkMutedSwatch.getRgb());
                     mBinding.leaderboardTab.setSelectedTabIndicatorColor(darkMutedSwatch.getRgb());
                 }
@@ -214,7 +214,7 @@ public class DetailActivity extends AppCompatActivity implements
                                      @Nullable String categoryId) {
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(GAME_ID, gameId);
-        if (categoryId != null){
+        if (categoryId != null) {
             intent.putExtra(CATEGORY_ID, categoryId);
         }
         return intent;
