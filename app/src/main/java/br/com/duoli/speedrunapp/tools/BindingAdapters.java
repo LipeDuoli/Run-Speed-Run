@@ -2,6 +2,7 @@ package br.com.duoli.speedrunapp.tools;
 
 import android.content.Context;
 import android.databinding.BindingAdapter;
+import android.text.Html;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ public class BindingAdapters {
         String text = context.getResources().getString(R.string.latest_run_time_format,
                 StringUtils.parseRunTime(runTime),
                 userName);
-        view.setText(text);
+        view.setText(Html.fromHtml(text));
     }
 
     @BindingAdapter({"cover"})
