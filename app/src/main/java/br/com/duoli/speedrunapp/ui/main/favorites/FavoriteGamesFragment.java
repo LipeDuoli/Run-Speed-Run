@@ -144,7 +144,7 @@ public class FavoriteGamesFragment extends Fragment implements
     @Override
     public void onClickGame(FavoriteGame game) {
         Intent detailIntent = DetailActivity.newInstance(getContext(),
-                game.getGameId());
+                game.getGameId(), game.getCategoryId());
 
         startActivity(detailIntent);
     }

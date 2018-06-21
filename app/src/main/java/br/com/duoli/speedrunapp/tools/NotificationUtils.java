@@ -75,18 +75,6 @@ public class NotificationUtils {
         });
     }
 
-    private static PendingIntent contentIntent(Context context, String gameId, int id) {
-        Intent startActivityIntent = DetailActivity.newInstance(context, gameId);
-
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
-        stackBuilder.addParentStack(MainActivity.class);
-        stackBuilder.addNextIntent(startActivityIntent);
-
-        return stackBuilder.getPendingIntent(
-                id,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-    }
-
     private static Notification buildNotification(Context context,
                                                   FavoriteGame game,
                                                   Bitmap gameImage,
@@ -106,7 +94,7 @@ public class NotificationUtils {
                 .setContentTitle(title)
                 .setContentText(bodyText)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
-                .setContentIntent(contentIntent(context, game.getGameId(), game.getId()))
+                .setContentIntent(contentIntent(context, game.getGameId(), game.getCategoryId(), game.getId()))
                 .setAutoCancel(true);
 
         if (gameImage != null) {
@@ -119,5 +107,17 @@ public class NotificationUtils {
         }
 
         return notificationBuilder.build();
+    }
+
+    private static PendingIntent contentIntent(Context context, String gameId, String categoryId, int id) {
+        Intent startActivityIntent = DetailActivity.newInstance(context, gameId, categoryId);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(startActivityIntent);
+
+        return stackBuilder.getPendingIntent(
+                id,
+                PendingIntent.FLAG_UPDATE_CURRENT);
     }
 }

@@ -154,7 +154,7 @@ public class GamesFragment extends Fragment implements
     @Override
     public void onClickGame(Game game) {
         Intent detailIntent = DetailActivity.newInstance(getContext(),
-                game.getId());
+                game.getId(), null);
 
         startActivity(detailIntent);
     }

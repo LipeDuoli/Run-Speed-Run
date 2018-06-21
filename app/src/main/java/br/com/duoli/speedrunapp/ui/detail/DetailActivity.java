@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.duoli.speedrunapp.R;
@@ -34,11 +35,14 @@ public class DetailActivity extends AppCompatActivity implements
     private static final String TAG = DetailActivity.class.getSimpleName();
     private static final int LOADER_ID = 5000;
     public static final String GAME_ID = "gameId";
+    public static final String CATEGORY_ID = "categoryId";
 
     private ActivityDetailBinding mBinding;
     private String mGameId = "";
+    private String mCategoryId = "";
     private DetailContract.Presenter mDetailPresenter;
     private LeaderboardFragmentPagerAdapter mLeaderboardPagerAdapter;
+    private List<String> categoryPositions = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,9 @@ public class DetailActivity extends AppCompatActivity implements
         if (getIntent().hasExtra(GAME_ID)) {
             mGameId = getIntent().getStringExtra(GAME_ID);
         }
+        if (getIntent().hasExtra(CATEGORY_ID)){
+            mCategoryId = getIntent().getStringExtra(CATEGORY_ID);
+        }
     }
 
     @Override
@@ -91,6 +98,20 @@ public class DetailActivity extends AppCompatActivity implements
         hideError();
         configureLeaderboardsTabsFor(game.getCategories());
         loadGameCoverBitmap(game.getAssets().getCoverLarge().getUri());
+        moveToTabPosition(mCategoryId);
+    }
+
+    private void moveToTabPosition(String categoryId) {
+        if (categoryId.isEmpty())
+            return;
+
+        for (int i = 0; i < categoryPositions.size(); i++){
+            String id = categoryPositions.get(i);
+            if (id.equals(categoryId)){
+                mBinding.leaderboardViewpager.setCurrentItem(i);
+                break;
+            }
+        }
     }
 
     private void loadGameCoverBitmap(String imageUrl) {
@@ -147,6 +168,7 @@ public class DetailActivity extends AppCompatActivity implements
                 mLeaderboardPagerAdapter.addFragment(
                         LeaderboardFragment.newInstance(mGameId, category.getId()),
                         category.getName());
+                categoryPositions.add(category.getId());
             }
         }
         mLeaderboardPagerAdapter.notifyDataSetChanged();
@@ -187,9 +209,14 @@ public class DetailActivity extends AppCompatActivity implements
         mBinding.errorLayout.getRoot().setVisibility(View.GONE);
     }
 
-    public static Intent newInstance(Context context, String gameId) {
+    public static Intent newInstance(@NonNull Context context,
+                                     @NonNull String gameId,
+                                     @Nullable String categoryId) {
         Intent intent = new Intent(context, DetailActivity.class);
         intent.putExtra(GAME_ID, gameId);
+        if (categoryId != null){
+            intent.putExtra(CATEGORY_ID, categoryId);
+        }
         return intent;
     }
 

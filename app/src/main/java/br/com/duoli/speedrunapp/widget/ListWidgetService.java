@@ -83,6 +83,7 @@ public class ListWidgetService extends RemoteViewsService {
 
             Intent fillInIntent = new Intent();
             fillInIntent.putExtra(DetailActivity.GAME_ID, currentRun.getGame().getId());
+            fillInIntent.putExtra(DetailActivity.CATEGORY_ID, currentRun.getCategory().getId());
             view.setOnClickFillInIntent(R.id.tv_latest_run_text, fillInIntent);
 
             return view;

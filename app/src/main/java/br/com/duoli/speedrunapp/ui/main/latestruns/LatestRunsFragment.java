@@ -142,7 +142,7 @@ public class LatestRunsFragment extends Fragment implements
     @Override
     public void onClickLatestRun(Run run) {
         Intent detailIntent = DetailActivity.newInstance(getContext(),
-                run.getGame().getId());
+                run.getGame().getId(), run.getCategory().getId());
 
         startActivity(detailIntent);
     }
